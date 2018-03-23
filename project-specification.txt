@@ -1,0 +1,25 @@
+{
+  prefix [com seanshubin]
+  name [condorcet]
+  description 'Condorcet voting system'
+  version 0.1-SNAPSHOT
+  developer {
+    name 'Sean Shubin'
+    githubName SeanShubin
+    mavenUserName SeanShubin
+    organization 'Sean Shubin'
+    url http://seanshubin.com/
+  }
+  dependencies {
+    kotlin-jre {
+      group    org.jetbrains.kotlin
+      artifact kotlin-stdlib-jre8
+    }
+  }
+  global [scala-library scala-test]
+  modules {
+    domain    [kotlin]
+    prototype [domain kotlin-jre]
+  }
+}
+
