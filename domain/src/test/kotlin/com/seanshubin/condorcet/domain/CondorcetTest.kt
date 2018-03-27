@@ -1,7 +1,6 @@
 package com.seanshubin.condorcet.domain
 
 import org.junit.Test
-import kotlin.test.assertEquals
 
 class CondorcetTest {
     @Test
@@ -16,7 +15,9 @@ class CondorcetTest {
             |7 dceba
             |8 ebadc
             """.trimMargin()
-        val votesAndCandidates = VotesAndCandidates.parseFromQuantifiedSingleLetterCandidates(text)
+        val candidatesAndVotes = CandidatesAndVotes.parseFromQuantifiedSingleLetterCandidates(text)
+        val schulze = candidatesAndVotes.tally()
+        println(candidatesAndVotes)
 //        val election = Election.createFromQuantifiedSingleLetterCandidates(text)
 //        val tally = election.tally()
 //        tally.reportLines().foreach(println)
