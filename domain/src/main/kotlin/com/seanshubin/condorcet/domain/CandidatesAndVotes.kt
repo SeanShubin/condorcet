@@ -15,11 +15,9 @@ data class CandidatesAndVotes(private val candidates: List<String>, private val 
         return listOf(name, *candidates.indices.map { votes.getValue(winIndex, it) }.toTypedArray())
     }
 
-    private fun tally():List<List<String>>{
-
+    fun tally():List<List<String>>{
+        TODO()
     }
-
-    private fun undefeated():List<Int> = votes.undefeated()
 
     private fun remove(ids:List<Int>):CandidatesAndVotes=
         CandidatesAndVotes(removeCandidates(ids), votes.remove(ids))

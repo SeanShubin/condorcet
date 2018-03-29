@@ -1,6 +1,6 @@
 package com.seanshubin.condorcet.domain
 
-data class Win constructor(private val size:Int, private val map: Map<Int, Loss>) {
+data class Win constructor(private val map: Map<Int, Loss>) {
     companion object {
         val EMPTY = Win(emptyMap<Int, Loss>().withDefault { Loss.EMPTY })
         private fun fromWinnerLoser(winner: Int, loser: Int): Win {
@@ -28,6 +28,9 @@ data class Win constructor(private val size:Int, private val map: Map<Int, Loss>
     fun getValue(winner:Int, loser:Int):Int = map.getValue(winner).getValue(loser)
     fun remove(ids:List<Int>):Win =
         Win(mapOf(*map.map { (win, loss) -> Pair(win, loss.remove(ids)) }.toTypedArray()).filter{ (win, _) -> !ids.contains(win) })
+    fun splitUndefeated():Pair<Win, Win> {
+        TODO()
+    }
 }
 fun Iterable<Win>.sum(): Win {
     var sum: Win = Win.EMPTY
