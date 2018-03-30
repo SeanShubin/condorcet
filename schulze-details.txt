@@ -1,0 +1,17 @@
+The "Schulze" method is a Condorcet method, with the added bonus that it can resolve circular ambiguities.
+All Condorcet methods will produce the same results as long as there is no circular ambiguity.
+For example, say your candidates were rock, paper, and scissors.
+If paper beats rock, rock beats scissors, and scissors beats paper, there is a circular ambiguity.
+Condorcet methods differ in which "Condorcet completion method" they use to resolve such cycles.
+
+The "Schulze" method for resolving cycles
+Lets say 5 voters prefer A to B, and 4 voters prefer B to C
+One possible "path" from A to C is A-(5)-B-(4)-C.
+A paths "strength" is the strength of its weakest link.  The strength of the path A-B-C in this example is 4
+The Schulze method computes the strongest path between each pair of candidates, and uses that to rank the candidates.
+This eliminates cycles, which allows the candidates to be ranked.
+
+The Floyd-Warshall algorithm
+This is a graph analysis algorithm for finding the shortest paths in a weighted graph
+It can be used to compute the strongest paths according to the Schulze method
+
