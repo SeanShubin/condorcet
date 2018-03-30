@@ -108,10 +108,16 @@ The following will be output
 
 The vote output format will start with a confirmation code, then a list of candidate rankings (ranking and candidate-name), formatted as so.
 
+    individual-votes
     456-683-781 1 Bob-Johnson 2 Alice-Smith 2 Carol-Williams 3 Dave-Jones 
     202-324-658 1 Alice-Smith 2 Bob-Johnson 3 Carol-Williams
     795-667-002 1 Carol-Williams 2 Bob-Johnson 3 Alice-Smith 4 <no-candidate> 5 Dave-Jones
-
+    final-tally
+    1st Bob-Johnson
+    2nd Alice-Smith Carol-Williams
+    4th Dave-Jones
+    
+(the final tally here is not accurate based on the individual votes, I am working on cleaning up the example)
 
 
 
