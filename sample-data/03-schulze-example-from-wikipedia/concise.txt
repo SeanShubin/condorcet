@@ -1,0 +1,8 @@
+5 acbed
+5 adecb
+8 bedac
+3 cabed
+7 caebd
+2 cbade
+7 dceba
+8 ebadc

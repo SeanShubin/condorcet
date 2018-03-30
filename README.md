@@ -45,8 +45,16 @@ So the ranking becomes A, then B, then C.
 In a Condorcet method, the 2 voters could accurately express their vote, and not cause B to defeat A.
 
 
-To further illustrate the problem with instant runoff voting, consider a contrived case with 10 candiates.
-Each voter has their pet preference, which is relatively unknown.
+Instant runoff voting does not meat condorcet criteria, it works like this:
+
+    Ballots are initially counted for each elector's top choice,
+    losing candidates are eliminated,
+    and ballots for losing candidates are redistributed until one candidate is the top remaining choice of a majority of the voters.
+
+The problem with this is that since only the top choices are counted each round, candidates closer to the consensus preference can be the first ones eliminated.
+To illustrate this, consider a contrived case with 10 candidates.
+Each voter has a relatively unknown preference.
+Each voter would settle for B instead of their preference.
 
 
     2 A B C
@@ -59,9 +67,10 @@ Each voter has their pet preference, which is relatively unknown.
     1 I B A
     1 J B A
 
-In both instant runoff and first past the post A wins, even though 80% of the voters prefer B to A 
+In both instant runoff and first past the post A wins, even though 80% of the voters prefer B to A.
+This is because B, the one every single voter preferred over someone else's top candidate, was the first one eliminated. 
 
-
+The "Schulze" method is a Condorcet method, with the added bonus that it can resolve circular ambiguities.
 All Condorcet methods will produce the same results as long as there is no circular ambiguity.
 For example, say your candidates were rock, paper, and scissors.
 If paper beats rock, rock beats scissors, and scissors beats paper, there is a circular ambiguity.
@@ -77,11 +86,6 @@ This eliminates cycles, which allows the candidates to be ranked.
 The Floyd-Warshall algorithm
 This is a graph analysis algorithm for finding the shortest paths in a weighted graph
 It can be used to compute the strongest paths according to the Schulze method
-
-
-<first past the post counter-example>
-
-<instant run-off counter counter-example>
 
 ## Example Implementation
 
