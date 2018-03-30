@@ -1,4 +1,4 @@
-# Condorcet Method Voting
+# The Condorcet Method of resolving votes
 
 ## Goal
 If a candidate would win a two-candidate election against each of the other candidates in a plurality vote, that candidate must be the winner.
