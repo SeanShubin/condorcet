@@ -1,3 +1,0 @@
-3 abc
-4 bac
-2 cab
