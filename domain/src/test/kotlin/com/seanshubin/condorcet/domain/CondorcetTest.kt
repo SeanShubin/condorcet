@@ -1,6 +1,7 @@
 package com.seanshubin.condorcet.domain
 
 import org.junit.Test
+import kotlin.test.assertTrue
 
 class CondorcetTest {
     @Test
@@ -10,8 +11,14 @@ class CondorcetTest {
         runTest("03-schulze-example-from-wikipedia")
     }
 
-    fun runTest(name: String): Unit {
+    private fun runTest(name: String) {
+        val actualLines: List<String> = listOf("a", "b", "c")
+        val expectedLines: List<String> = listOf("a", "d", "c")
+        assertLinesEqual(actualLines, expectedLines)
+    }
 
-//        assertLinesEqual(actualLines, expectedLines)
+    private fun assertLinesEqual(actualLines: List<String>, expectedLines: List<String>) {
+        val result = ListDifference.diff(actualLines, expectedLines)
+        assertTrue(result.isSame, result.messageLines.joinToString("\n"))
     }
 }
