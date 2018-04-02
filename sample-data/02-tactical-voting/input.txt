@@ -2,7 +2,7 @@ candidates (name)
     Preferred
     Unpopular
     Spoiler
-voters (name)
+eligible-to-vote (name)
     Alice
     Bob
     Carol

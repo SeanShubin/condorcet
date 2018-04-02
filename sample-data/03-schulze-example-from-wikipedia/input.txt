@@ -4,7 +4,7 @@ candidates (name)
     Charlie
     Delta
     Echo
-voters (name)
+eligible-to-vote (name)
     mattie-reyes
     glenda-dougherty
     gloria-myers
