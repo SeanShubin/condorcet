@@ -1,7 +1,7 @@
 candidates (name)
     Preferred
-    Unpopular
     Spoiler
+    Unpopular
 eligible-to-vote (name)
     Alice
     Bob
