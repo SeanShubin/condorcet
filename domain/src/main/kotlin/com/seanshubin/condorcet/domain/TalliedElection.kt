@@ -6,12 +6,18 @@ data class TalliedElection(val candidates: List<String>,
                            val secretBallots: List<SecretBallot>,
                            val tally: List<TallyRow>) {
     fun toLines(): List<String> {
+        val tableFormatter = TableFormatter(wantInterleave = false,rowLeft ="", rowCenter = " ", rowRight = "")
         return listOf("candidates (name)") +
-                candidates.map{indent(it)} +
+                candidates.sorted().map{indent(it)} +
                 listOf("voted (name)") +
                 voted.map{indent(it)} +
-                listOf("did-not-vote (name)")
+                listOf("did-not-vote (name)") +
+                didNotVote.map{indent(it)} +
+                listOf("ballots (confirmation { rank candidate })") +
+                tableFormatter.createTable(secretBallots.sorted().map { it.toRow() }).map{indent(it.trim())} +
+                listOf("tally (place { candidate })") +
+                tableFormatter.createTable(tally.map { it.toRow() }).map{indent(it.trim())}
     }
 
-    fun indent(s:String):String = "    $s"
+    private fun indent(s:String):String = "    $s"
 }

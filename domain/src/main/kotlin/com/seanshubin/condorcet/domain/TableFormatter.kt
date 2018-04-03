@@ -2,7 +2,10 @@ package com.seanshubin.condorcet.domain
 
 import com.seanshubin.condorcet.domain.ListUtil.transpose
 
-object TableUtil {
+class TableFormatter(val wantInterleave:Boolean,
+                     val rowLeft:String = "║",
+                     val rowCenter:String = "│",
+                     val rowRight:String = "║") {
 
     interface Justify
 
@@ -14,11 +17,15 @@ object TableUtil {
         val paddedRows = makeAllRowsTheSameSize(originalRows, "")
         val columns = paddedRows.transpose()
         val columnWidths = columns.map { a: List<Any> -> maxWidthForColumn(a) }
-        val top = makeTop(columnWidths)
-        val middle = makeMiddle(columnWidths)
-        val bottom = makeBottom(columnWidths)
         val formattedRows = formatRows(columnWidths, paddedRows)
-        return listOf(top) + interleave(formattedRows, middle) + listOf(bottom)
+        return if(wantInterleave){
+            val top = makeTop(columnWidths)
+            val middle = makeMiddle(columnWidths)
+            val bottom = makeBottom(columnWidths)
+            listOf(top) + interleave(formattedRows, middle) + listOf(bottom)
+        } else {
+            formattedRows
+        }
     }
 
     private fun makeAllRowsTheSameSize(rows: List<List<Any>>, value: Any): List<List<Any>> {
@@ -61,7 +68,7 @@ object TableUtil {
     }
 
     private fun formatRows(columnWidths: List<Int>, rows: List<List<Any>>): List<String> {
-        val formatRow: (List<Any>) -> String = { a -> makeRow(columnWidths, a, " ", "║", "│", "║") }
+        val formatRow: (List<Any>) -> String = { a -> makeRow(columnWidths, a, " ", rowLeft, rowCenter, rowRight) }
         return rows.map { x -> formatRow(x) }
     }
 
