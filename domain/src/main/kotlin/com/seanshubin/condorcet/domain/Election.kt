@@ -2,7 +2,7 @@ package com.seanshubin.condorcet.domain
 
 data class Election(val candidates: List<String>,
                     val eligibleToVote: List<String>,
-                    val votes: List<Ballot>) {
+                    val ballots: List<Ballot>) {
     fun tally(): TalliedElection {
         TODO()
     }

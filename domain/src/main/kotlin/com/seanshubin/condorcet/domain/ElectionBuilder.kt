@@ -13,7 +13,6 @@ data class ElectionBuilder(val mode: Mode = Mode.unknown,
             override fun processDataLine(builder: ElectionBuilder, line: String): ElectionBuilder =
                     builder.copy(eligibleToVote = builder.eligibleToVote + listOf(line))
         },
-        //todo: rename vote to ballot
         ballot("ballots") {
             override fun processDataLine(builder: ElectionBuilder, line: String): ElectionBuilder =
                     builder.copy(ballots = builder.ballots + listOf(Ballot.fromString(line)))
@@ -54,8 +53,7 @@ data class ElectionBuilder(val mode: Mode = Mode.unknown,
         return copy(mode = Mode.fromString(firstWord))
     }
 
-    fun build(): Election =
-            Election(candidates, eligibleToVote, ballots)
+    fun build(): Election = Election(candidates, eligibleToVote, ballots)
 
     companion object {
         val EMPTY = ElectionBuilder()
