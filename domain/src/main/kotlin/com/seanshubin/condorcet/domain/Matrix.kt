@@ -56,6 +56,8 @@ class Matrix(private val rows: List<List<Int>>) {
         return Matrix(strongestPaths)
     }
 
+    fun schulzeTally(): List<List<Int>> = TODO()
+
     private fun createEmptyMutableMatrixData(rowCount: Int, columnCount: Int): MutableList<MutableList<Int>> =
             mutableListOf(*(0 until rowCount).map { mutableListOf(*(0 until columnCount).map { 0 }.toTypedArray()) }.toTypedArray())
 }

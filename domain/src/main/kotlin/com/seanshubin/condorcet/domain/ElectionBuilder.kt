@@ -57,8 +57,8 @@ data class ElectionBuilder(val mode: Mode = Mode.unknown,
 
     companion object {
         val EMPTY = ElectionBuilder()
-        fun processLine(electionBuilder: ElectionBuilder, line: String): ElectionBuilder {
-            return electionBuilder.processLine(line)
+        val processLine: (electionBuilder: ElectionBuilder, line: String) -> ElectionBuilder = { electionBuilder, line ->
+            electionBuilder.processLine(line)
         }
     }
 }
