@@ -18,17 +18,15 @@ class Matrix(private val rows: List<List<Int>>) {
         }
     }
 
+    fun rowCount(): Int = rowCount
+    fun columnCount(): Int = columnCount
+
     fun get(rowIndex: Int, columnIndex: Int): Int {
         return rows[rowIndex][columnIndex]
     }
 
     fun schulzeStrongestPaths(): Matrix {
-        val size = if (rowCount == columnCount)
-            rowCount
-        else
-            throw UnsupportedOperationException(
-                    "This method is only valid for square matrices," +
-                            " this matrix has $rowCount rows and $columnCount columns")
+        val size = squareSize()
         val strongestPaths = createEmptyMutableMatrixData(rowCount, columnCount)
         for (i in 0 until size) {
             for (j in 0 until size) {
@@ -56,7 +54,28 @@ class Matrix(private val rows: List<List<Int>>) {
         return Matrix(strongestPaths)
     }
 
-    fun schulzeTally(): List<List<Int>> = TODO()
+    fun schulzeTally(): List<List<Int>> = schulzeTally(emptyList(), emptyList())
+    private fun schulzeTally(soFar: List<List<Int>>, indices: List<Int>): List<List<Int>> {
+        val size = squareSize()
+        return if (indices.size == size) soFar
+        else {
+            val undefeated = (0 until size).filter { i ->
+                !indices.contains(i) && (0 until size).all { j ->
+                    indices.contains(j) || get(i, j) >= get(j, i)
+                }
+            }
+            schulzeTally(soFar + listOf(undefeated), indices + undefeated)
+        }
+    }
+
+    fun squareSize(): Int =
+            if (rowCount == columnCount)
+                rowCount
+            else
+                throw UnsupportedOperationException(
+                        "This method is only valid for square matrices," +
+                                " this matrix has $rowCount rows and $columnCount columns")
+
 
     private fun createEmptyMutableMatrixData(rowCount: Int, columnCount: Int): MutableList<MutableList<Int>> =
             mutableListOf(*(0 until rowCount).map { mutableListOf(*(0 until columnCount).map { 0 }.toTypedArray()) }.toTypedArray())
@@ -65,3 +84,21 @@ class Matrix(private val rows: List<List<Int>>) {
 fun matrixOfRows(vararg rows: List<Int>): Matrix = Matrix(rows.toList())
 fun matrixOfSizeWithDefault(rowCount: Int, columnCount: Int, default: Int): Matrix =
         Matrix(listOf(*(0 until rowCount).map { listOf(*(0 until columnCount).map { default }.toTypedArray()) }.toTypedArray()))
+
+fun matrixOfSizeWithGenerator(rowCount: Int, columnCount: Int, generate: (Int, Int) -> Int): Matrix {
+    val rows = mutableListOf<List<Int>>()
+    for (i in 0 until rowCount) {
+        val cells = mutableListOf<Int>()
+        for (j in 0 until columnCount) {
+            cells.add(generate(i, j))
+        }
+        rows.add(cells)
+    }
+    return Matrix(rows)
+}
+
+operator fun Matrix.plus(that: Matrix): Matrix {
+    if (this.rowCount() != that.rowCount())
+        throw RuntimeException("Attempting to add a matrix with ${this.rowCount()} rows to matrix with ${that.rowCount()} rows")
+    return matrixOfSizeWithGenerator(this.rowCount(), this.columnCount(), { i, j -> this.get(i, j) + that.get(i, j) })
+}

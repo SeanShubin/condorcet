@@ -4,8 +4,9 @@ data class Election(val candidates: List<String>,
                     val eligibleToVote: List<String>,
                     val ballots: List<Ballot>) {
     fun tally(): TalliedElection {
-        val (voted, didNotVote) = seeWhoVoted()
-        val matrix = ballots.fold(MatrixBuilder.empty(candidates.size), MatrixBuilder.processBallot).build()
+        val voted = ballots.map { it.id }
+        val didNotVote = eligibleToVote.filterNot { voted.contains(it) }
+        val matrix = ballots.fold(MatrixBuilder.empty(candidates), MatrixBuilder.processBallot).build()
         val schulzeMatrix = matrix.schulzeStrongestPaths()
         val matrixTally = schulzeMatrix.schulzeTally()
         val tally = matrixTallyToTally(matrixTally)
@@ -13,9 +14,11 @@ data class Election(val candidates: List<String>,
         return TalliedElection(candidates, voted, didNotVote, secretBallots, tally)
     }
 
-    fun seeWhoVoted(): Pair<List<String>, List<String>> = TODO()
-    fun ballotToSecretBallot(ballot: Ballot): SecretBallot = TODO()
-    fun matrixTallyToTally(tally: List<List<Int>>): List<TallyRow> = TODO()
+    fun ballotToSecretBallot(ballot: Ballot): SecretBallot = SecretBallot(ballot.confirmation, ballot.rankings)
+    fun matrixTallyToTally(tally: List<List<Int>>): List<TallyRow> =
+        tally.mapIndexed{index, row -> createRow(index, row)}
+    fun createRow(index:Int, row:List<Int>):TallyRow =
+        TallyRow(index, row.map{candidates[it]})
 
     companion object {
         fun fromLines(lines: List<String>): Election =
