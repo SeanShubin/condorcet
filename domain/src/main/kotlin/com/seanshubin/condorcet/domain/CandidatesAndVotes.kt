@@ -15,19 +15,20 @@ data class CandidatesAndVotes(private val candidates: List<String>, private val 
         return listOf(name, *candidates.indices.map { votes.getValue(winIndex, it) }.toTypedArray())
     }
 
-    fun tally():List<List<String>>{
+    fun tally(): List<List<String>> {
         TODO()
     }
 
-    private fun remove(ids:List<Int>):CandidatesAndVotes=
-        CandidatesAndVotes(removeCandidates(ids), votes.remove(ids))
+    private fun remove(ids: List<Int>): CandidatesAndVotes =
+            CandidatesAndVotes(removeCandidates(ids), votes.remove(ids))
 
-    private fun tallyIdToString(resultIds:List<List<Int>>):List<List<String>> =
-        resultIds.map { tiedIdsToStrings(it) }
+    private fun tallyIdToString(resultIds: List<List<Int>>): List<List<String>> =
+            resultIds.map { tiedIdsToStrings(it) }
 
-    private fun tiedIdsToStrings(ids:List<Int>):List<String> =
+    private fun tiedIdsToStrings(ids: List<Int>): List<String> =
             ids.map { candidates[it] }
-    private fun removeCandidates(ids:List<Int>):List<String> =
+
+    private fun removeCandidates(ids: List<Int>): List<String> =
             candidates.withIndex().filter { !ids.contains(it.index) }.map { it.value }
 
     companion object {

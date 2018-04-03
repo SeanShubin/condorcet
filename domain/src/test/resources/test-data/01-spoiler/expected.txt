@@ -14,7 +14,7 @@ voted (name)
     Ivy
     Judy
 did-not-vote (name)
-votes (confirmation { rank candidate })
+ballots (confirmation { rank candidate })
     0023a873-c36f-48f0-b25a-6206c2602ee6 1 Spoiler   2 Preferred 3 Unpopular
     051a5a89-9242-4381-8067-55d5bac12775 1 Unpopular 2 Preferred 3 Spoiler
     0ad21976-c551-464f-be68-b61fcbbfd85a 1 Preferred 2 Unpopular 3 Spoiler

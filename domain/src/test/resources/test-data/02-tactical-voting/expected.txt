@@ -14,7 +14,7 @@ voted (name)
     Ivy
 did-not-vote (name)
     Judy
-votes (name confirmation { rank candidate })
+ballots (name confirmation { rank candidate })
     6561cc4e-f939-48d7-9771-2f15298622ab 1 Unpopular 2 Preferred 3 Spoiler
     8bcc9a02-1a41-4724-ba36-b733a416d190 1 Spoiler   2 Preferred 3 Unpopular
     b97c34da-0a8c-46b3-92e1-027999a45d36 1 Preferred 2 Unpopular 3 Spoiler

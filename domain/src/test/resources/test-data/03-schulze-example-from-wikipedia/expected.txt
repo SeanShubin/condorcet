@@ -56,7 +56,7 @@ did-not-vote (name)
     maryellen-le
     truman-mueller
     willa-tate
-votes (confirmation { rank candidate })
+ballots (confirmation { rank candidate })
     0018eb77-72ac-48b1-9cc1-bdcc23e041ae 1 Alpha   2 Charlie 3 Beta   4 Echo    5 Delta
     0f941a22-b8e8-44fe-a27b-dd432321377f 1 Charlie 2 Alpha   3 Echo   4 Beta    5 Delta
     10bf7fa5-4923-40d4-a560-974c21b98d31 1 Echo    2 Beta    3 Alpha  4 Delta   5 Charlie

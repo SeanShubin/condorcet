@@ -13,8 +13,9 @@ class CondorcetTest {
     }
 
     private fun runTest(name: String) {
-        val actualLines: List<String> = emptyList()
-        val expectedLines: List<String> = resourceNameToLines("test-data/$name/expected.txt")
+        val inputLines = resourceNameToLines("test-data/$name/input.txt")
+        val actualLines = Condorcet.processLines(inputLines)
+        val expectedLines = resourceNameToLines("test-data/$name/expected.txt")
         assertLinesEqual(actualLines, expectedLines)
     }
 

@@ -13,7 +13,7 @@ eligible-to-vote (name)
     Heidi
     Ivy
     Judy
-votes (name confirmation { rank candidate })
+ballots (name confirmation { rank candidate })
     Alice dfb27db8-df47-4069-a584-4066558f6ec6 1 Preferred 2 Unpopular 3 Spoiler
     Bob   b97c34da-0a8c-46b3-92e1-027999a45d36 1 Preferred 2 Unpopular 3 Spoiler
     Carol c24f0fa4-3739-40e0-830c-75376e7eeb77 1 Preferred 2 Unpopular 3 Spoiler

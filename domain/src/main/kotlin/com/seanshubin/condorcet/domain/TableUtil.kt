@@ -13,7 +13,7 @@ object TableUtil {
     fun createTable(originalRows: List<List<Any>>): List<String> {
         val paddedRows = makeAllRowsTheSameSize(originalRows, "")
         val columns = paddedRows.transpose()
-        val columnWidths = columns.map { a:List<Any> -> maxWidthForColumn(a) }
+        val columnWidths = columns.map { a: List<Any> -> maxWidthForColumn(a) }
         val top = makeTop(columnWidths)
         val middle = makeMiddle(columnWidths)
         val bottom = makeBottom(columnWidths)
@@ -79,7 +79,8 @@ object TableUtil {
         fun combine(soFar: List<T>, next: T): List<T> {
             return listOf(next) + listOf(separator) + soFar
         }
-        val combineLambda = { a:List<T>,b:T->combine(a,b) }
+
+        val combineLambda = { a: List<T>, b: T -> combine(a, b) }
         return if (data.isEmpty()) {
             emptyList()
         } else {

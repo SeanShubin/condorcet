@@ -7,7 +7,8 @@ data class Win constructor(private val map: Map<Int, Loss>) {
             val loss = Loss.fromIndex(loser)
             return Win(mapOf(Pair(winner, loss)).withDefault { Loss.EMPTY })
         }
-        fun fromWinnerLoser(winnerLoser: Pair<Int,Int>): Win {
+
+        fun fromWinnerLoser(winnerLoser: Pair<Int, Int>): Win {
             val (winner, loser) = winnerLoser
             return fromWinnerLoser(winner, loser)
         }
@@ -21,17 +22,19 @@ data class Win constructor(private val map: Map<Int, Loss>) {
         return Win(mapOf(*pairs.toTypedArray()).withDefault { Loss.EMPTY })
     }
 
-    operator fun times(multiplyBy:Int):Win {
+    operator fun times(multiplyBy: Int): Win {
         return Win(mapOf(*map.map { (key, value) -> Pair(key, value * multiplyBy) }.toTypedArray()).withDefault { Loss.EMPTY })
     }
 
-    fun getValue(winner:Int, loser:Int):Int = map.getValue(winner).getValue(loser)
-    fun remove(ids:List<Int>):Win =
-        Win(mapOf(*map.map { (win, loss) -> Pair(win, loss.remove(ids)) }.toTypedArray()).filter{ (win, _) -> !ids.contains(win) })
-    fun splitUndefeated():Pair<Win, Win> {
+    fun getValue(winner: Int, loser: Int): Int = map.getValue(winner).getValue(loser)
+    fun remove(ids: List<Int>): Win =
+            Win(mapOf(*map.map { (win, loss) -> Pair(win, loss.remove(ids)) }.toTypedArray()).filter { (win, _) -> !ids.contains(win) })
+
+    fun splitUndefeated(): Pair<Win, Win> {
         TODO()
     }
 }
+
 fun Iterable<Win>.sum(): Win {
     var sum: Win = Win.EMPTY
     for (element in this) {

@@ -8,10 +8,8 @@ import java.nio.charset.Charset
 object IoUtil {
     fun inputStreamToLines(inputStream: InputStream, charset: Charset): List<String> {
         val reader = BufferedReader(InputStreamReader(inputStream, charset))
-        try {
+        reader.use { reader ->
             return bufferedReaderToLines(reader)
-        } finally {
-            reader.close()
         }
     }
 

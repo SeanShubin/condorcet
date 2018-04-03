@@ -55,7 +55,7 @@ eligible-to-vote (name)
     truman-mueller
     waldo-cervantes
     willa-tate
-votes (name confirmation { rank candidate })
+ballots (name confirmation { rank candidate })
     aaron-stevens       9f74ab6c-bbae-4827-a2bc-c57b1b7df68a 1 Alpha   2 Charlie 3 Beta   4 Echo    5 Delta
     aisha-nguyen        371a331d-9797-4436-8539-b7ee60690950 1 Alpha   2 Charlie 3 Beta   4 Echo    5 Delta
     alisha-blackburn    eef6352a-1053-4650-96f1-277c000e8de8 1 Alpha   2 Charlie 3 Beta   4 Echo    5 Delta
