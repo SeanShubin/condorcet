@@ -6,7 +6,7 @@ object ListDifference {
     fun <T> diff(a: List<T>, b: List<T>): DifferenceResult {
         fun buildSeqDifference(index: Int, soFar: List<T>, remainA: List<T>, remainB: List<T>): DifferenceResult {
             fun composeSeqDifference(a: String, b: String): DifferenceResult {
-                val heading = "sequences different at index $index"
+                val heading = "sequences different at line ${index + 1}"
                 val sameMessage = soFar.asReversed().withIndex().map { composeSameAtIndex(it) }
                 val differenceMessage = composeDifferentAtIndex(index, a, b)
                 val messageLines = listOf(heading) + sameMessage + differenceMessage + listOf("remaining elements skipped")
@@ -41,10 +41,10 @@ object ListDifference {
 
     private fun <T> composeSameAtIndex(valueAndIndex: IndexedValue<T>): String {
         val (index, value) = valueAndIndex
-        return "$index same        = $value"
+        return "${index + 1} same        = $value"
     }
 
     private fun composeDifferentAtIndex(index: Int, a: String, b: String): List<String> =
-            listOf("$index different-a = $a", "$index different-b = $b")
+            listOf("${index + 1} different-a = $a", "${index + 1} different-b = $b")
 
 }

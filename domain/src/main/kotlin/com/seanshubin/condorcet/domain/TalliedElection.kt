@@ -10,9 +10,9 @@ data class TalliedElection(val candidates: List<String>,
         return listOf("candidates (name)") +
                 candidates.sorted().map{indent(it)} +
                 listOf("voted (name)") +
-                voted.map{indent(it)} +
+                voted.sorted().map { indent(it) } +
                 listOf("did-not-vote (name)") +
-                didNotVote.map{indent(it)} +
+                didNotVote.sorted().map { indent(it) } +
                 listOf("ballots (confirmation { rank candidate })") +
                 tableFormatter.createTable(secretBallots.sorted().map { it.toRow() }).map{indent(it.trim())} +
                 listOf("tally (place { candidate })") +

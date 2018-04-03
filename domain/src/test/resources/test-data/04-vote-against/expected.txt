@@ -11,9 +11,9 @@ did-not-vote (name)
     Bob
     Dave
 ballots (confirmation { rank candidate })
-    0ad21976-c551-464f-be68-b61fcbbfd85a 1 Coconut   2 Vanilla   3 Chocolate
-    87c257bc-be9f-4edf-81ac-fc8d0687745e 1 Chocolate 2 Vanilla   3 <no-candidate> 4 Coconut
-    980fb0c0-77ba-4ffb-be3b-ef190a7f14ce 1 Vanilla   2 Chocolate 3 <no-candidate> 4 Coconut
+    4f7ddf30-879a-4bb3-9cd7-84723a4f926b 1 Coconut   2 Vanilla   3 Chocolate
+    9b42ab31-ec3f-4174-a3a6-859c3d6df92c 1 Chocolate 2 Vanilla   3 <no-candidate> 4 Coconut
+    dd8b2569-dcc6-4abc-8aff-5bd18ba557b2 1 Vanilla   2 Chocolate 3 <no-candidate> 4 Coconut
 tally (place { candidate })
     1st Vanilla
     2nd Chocolate
