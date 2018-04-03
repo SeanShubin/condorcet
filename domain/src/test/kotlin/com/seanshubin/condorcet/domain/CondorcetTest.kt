@@ -4,6 +4,7 @@ import org.junit.Test
 import kotlin.test.assertTrue
 
 class CondorcetTest {
+    val classLoader = ClassLoaderInstanceDelegate(this.javaClass.classLoader)
     @Test
     fun testDataSamples() {
         runTest("01-spoiler")
@@ -12,13 +13,22 @@ class CondorcetTest {
     }
 
     private fun runTest(name: String) {
-        val actualLines: List<String> = listOf("a", "b", "c")
-        val expectedLines: List<String> = listOf("a", "d", "c")
+        val actualLines: List<String> = emptyList()
+        val expectedLines: List<String> = resourceNameToLines("test-data/$name/expected.txt")
         assertLinesEqual(actualLines, expectedLines)
     }
 
     private fun assertLinesEqual(actualLines: List<String>, expectedLines: List<String>) {
         val result = ListDifference.diff(actualLines, expectedLines)
         assertTrue(result.isSame, result.messageLines.joinToString("\n"))
+    }
+
+    private fun resourceNameToLines(name: String): List<String> {
+        val inputStream = classLoader.getResourceAsStream(name)
+        if (inputStream == null) {
+            throw RuntimeException("Unable to find resource named '$name'")
+        } else {
+            return IoUtil.inputStreamToLines(inputStream, GlobalConstants.CHARSET)
+        }
     }
 }
