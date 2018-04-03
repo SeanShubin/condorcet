@@ -1,6 +1,5 @@
 package com.seanshubin.condorcet.prototype
 
-import com.seanshubin.condorcet.domain.NameGenerator
 import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader

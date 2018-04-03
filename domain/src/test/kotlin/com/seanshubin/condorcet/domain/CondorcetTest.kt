@@ -4,7 +4,7 @@ import org.junit.Test
 import kotlin.test.assertTrue
 
 class CondorcetTest {
-    val classLoader = ClassLoaderInstanceDelegate(this.javaClass.classLoader)
+    val classLoader = this.javaClass.classLoader
     @Test
     fun testDataSamples() {
         runTest("01-spoiler")
