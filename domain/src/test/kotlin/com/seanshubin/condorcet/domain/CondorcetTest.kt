@@ -10,6 +10,7 @@ class CondorcetTest {
         runTest("01-spoiler")
         runTest("02-tactical-voting")
         runTest("03-schulze-example-from-wikipedia")
+        runTest("04-vote-against")
     }
 
     private fun runTest(name: String) {
@@ -21,6 +22,9 @@ class CondorcetTest {
 
     private fun assertLinesEqual(actualLines: List<String>, expectedLines: List<String>) {
         val result = ListDifference.diff(actualLines, expectedLines)
+        if (!result.isSame) {
+            actualLines.forEach { println(it) }
+        }
         assertTrue(result.isSame, result.messageLines.joinToString("\n"))
     }
 

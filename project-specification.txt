@@ -13,13 +13,18 @@
   dependencies {
     kotlin-jre {
       group    org.jetbrains.kotlin
-      artifact kotlin-stdlib-jre8
+      artifact kotlin-stdlib-jdk8
+    }
+    kotlin-junit {
+        group org.jetbrains.kotlin
+        artifact kotlin-test-junit
+        scope test
     }
   }
-  global [scala-library scala-test]
+  global [kotlin-jre kotlin-junit]
   modules {
-    domain    [kotlin]
-    prototype [domain kotlin-jre]
+    domain    []
+    prototype [domain]
+    console   [domain]
   }
 }
-
