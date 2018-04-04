@@ -3,7 +3,7 @@ package com.seanshubin.condorcet.domain
 import kotlin.math.max
 import kotlin.math.min
 
-class Matrix(private val rows: List<List<Int>>) {
+class Matrix(val rows: List<List<Int>>) {
     private var rowCount: Int = 0
     private var columnCount: Int = 0
 

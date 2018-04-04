@@ -25,6 +25,14 @@ ballots (confirmation { rank candidate })
     a971633e-db3f-4c3f-8d14-f4c9516b5c93 1 Spoiler   2 Preferred 3 Unpopular
     f68f82d5-ef9d-4f9d-9e29-5f9fc2fbc8e1 1 Unpopular 2 Preferred 3 Spoiler
     f88fd252-c170-4927-8ab8-b8e1a49800dd 1 Spoiler   2 Preferred 3 Unpopular
+preference matrix
+    0 6 7
+    4 0 4
+    3 6 0
+strongest path matrix (for schulze method)
+    0 6 7
+    0 0 0
+    0 6 0
 tally (place { candidate })
     1st Preferred
     2nd Unpopular

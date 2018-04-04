@@ -7,18 +7,18 @@ data class MatrixBuilder(val matrix: Matrix, val candidates:List<String>) {
     fun build(): Matrix = matrix
 
     private fun ballotToMatrix(ballot:Ballot):Matrix {
-        val pairwisePreferenceIndices = ballot.pairwisePreferences().map{candidatePairToIndices(it)}
+        val pairwisePreferences = ballot.pairwisePreferences()
+        val pairwisePreferenceIndices = pairwisePreferences.map { candidatePairToIndices(it) }
         val valueMap = pairwisePreferenceIndices.map{ Pair(it, 1) }.toMap().withDefault { 0 }
         val size = candidates.size
-        return matrixOfSizeWithGenerator(size, size, {i,j -> valueMap.getValue(Pair(i,j))})
+        val matrix = matrixOfSizeWithGenerator(size, size, { i, j -> valueMap.getValue(Pair(i, j)) })
+        return matrix
     }
 
     private fun candidatePairToIndices(candidatePair:Pair<String, String>):Pair<Int, Int> {
         val (stronger, weaker) = candidatePair
         return Pair(candidateToIndexMap.getValue(stronger), candidateToIndexMap.getValue(weaker))
     }
-
-
 
     companion object {
         fun empty(candidates: List<String>): MatrixBuilder = MatrixBuilder(

@@ -13,7 +13,10 @@ data class Ballot(val id: String,
         val result = mutableListOf<Pair<String, String>>()
         for (i in 0 until rankings.size-1) {
             for(j in i+1 until rankings.size){
-                result.add(Pair(rankings[i].candidate, rankings[j].candidate))
+                when {
+                    rankings[i].rank < rankings[j].rank -> result.add(Pair(rankings[i].candidate, rankings[j].candidate))
+                    rankings[i].rank > rankings[j].rank -> result.add(Pair(rankings[j].candidate, rankings[i].candidate))
+                }
             }
         }
         return result

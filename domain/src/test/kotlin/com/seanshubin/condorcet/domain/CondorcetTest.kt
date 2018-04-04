@@ -11,18 +11,20 @@ class CondorcetTest {
         runTest("02-tactical-voting")
         runTest("03-schulze-example-from-wikipedia")
         runTest("04-vote-against")
+        runTest("05-tie")
     }
 
     private fun runTest(name: String) {
         val inputLines = resourceNameToLines("test-data/$name/input.txt")
         val actualLines = Condorcet.processLines(inputLines)
         val expectedLines = resourceNameToLines("test-data/$name/expected.txt")
-        assertLinesEqual(actualLines, expectedLines)
+        assertLinesEqual(name, actualLines, expectedLines)
     }
 
-    private fun assertLinesEqual(actualLines: List<String>, expectedLines: List<String>) {
+    private fun assertLinesEqual(name: String, actualLines: List<String>, expectedLines: List<String>) {
         val result = ListDifference.diff(actualLines, expectedLines)
         if (!result.isSame) {
+            println("difference in test $name")
             actualLines.forEach { println(it) }
         }
         assertTrue(result.isSame, result.messageLines.joinToString("\n"))

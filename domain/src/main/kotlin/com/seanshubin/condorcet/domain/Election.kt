@@ -11,7 +11,7 @@ data class Election(val candidates: List<String>,
         val matrixTally = schulzeMatrix.schulzeTally()
         val tally = matrixTallyToTally(matrixTally)
         val secretBallots = ballots.map { ballotToSecretBallot(it) }
-        return TalliedElection(candidates, voted, didNotVote, secretBallots, tally)
+        return TalliedElection(candidates, voted, didNotVote, secretBallots, matrix, schulzeMatrix, tally)
     }
 
     fun ballotToSecretBallot(ballot: Ballot): SecretBallot = SecretBallot(ballot.confirmation, ballot.rankings)

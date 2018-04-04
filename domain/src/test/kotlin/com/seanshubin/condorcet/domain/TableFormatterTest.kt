@@ -37,7 +37,6 @@ class TableFormatterTest {
                 "Peggy Trent Wendy  "
         )
         val actual = tableFormatter.createTable(input)
-        actual.forEach{println(it)}
         assertEquals(expected, actual)
     }
 }

@@ -53,7 +53,7 @@ data class ElectionBuilder(val mode: Mode = Mode.unknown,
         return copy(mode = Mode.fromString(firstWord))
     }
 
-    fun build(): Election = Election(candidates, eligibleToVote, ballots)
+    fun build(): Election = Election(candidates.sorted(), eligibleToVote, ballots)
 
     companion object {
         val EMPTY = ElectionBuilder()

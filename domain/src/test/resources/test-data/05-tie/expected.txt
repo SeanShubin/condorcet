@@ -1,0 +1,33 @@
+candidates (name)
+    Lizard
+    Paper
+    Rock
+    Scissors
+    Spock
+voted (name)
+    Alice
+    Bob
+    Carol
+    Dave
+    Eve
+did-not-vote (name)
+ballots (confirmation { rank candidate })
+    7b61bcb4-fc73-4efe-9fce-cb2b969a2fa1 1 Paper    2 Rock   2 Spock
+    b60ce2e2-9683-49f6-95e7-e6161fcbf045 1 Lizard   2 Spock  2 Paper
+    bc60b9df-e2d0-4643-b509-87a6fa34565f 1 Spock    2 Rock   2 Scissors
+    c132095f-7cce-4d41-857a-25aebc5023db 1 Scissors 2 Paper  2 Lizard
+    f7deaa6b-7d8d-44a3-a5d7-74e698ac3536 1 Rock     2 Lizard 2 Scissors
+preference matrix
+    0 1 0 0 1
+    0 0 1 0 1
+    1 0 0 1 0
+    1 1 0 0 0
+    0 0 1 1 0
+strongest path matrix (for schulze method)
+    0 1 1 1 1
+    1 0 1 1 1
+    1 1 0 1 1
+    1 1 1 0 1
+    1 1 1 1 0
+tally (place { candidate })
+    1st Lizard Paper Rock Scissors Spock
