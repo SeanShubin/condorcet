@@ -14,18 +14,31 @@ data class Ballot(val id: String,
             listOf(id, confirmation, *(rankings.flatMap { it.toRow() }.toTypedArray()))
 
 
-    fun pairwisePreferences(): List<Pair<String, String>> {
+    fun pairwisePreferences(allCandidates: List<String>): List<Pair<String, String>> {
+        val candidateRankMap = buildCandidateRankMap()
+        fun betterRankThan(left: String, right: String): Boolean {
+            val leftRank = candidateRankMap[left]
+            val rightRank = candidateRankMap[right]
+            if (leftRank == null) return false
+            if (rightRank == null) return true;
+            return leftRank < rightRank
+        }
         val result = mutableListOf<Pair<String, String>>()
-        for (i in 0 until rankings.size - 1) {
-            for (j in i + 1 until rankings.size) {
-                when {
-                    rankings[i].rank < rankings[j].rank -> result.add(Pair(rankings[i].candidate, rankings[j].candidate))
-                    rankings[i].rank > rankings[j].rank -> result.add(Pair(rankings[j].candidate, rankings[i].candidate))
+        for (i in allCandidates) {
+            for (j in allCandidates) {
+                if (betterRankThan(i, j)) {
+                    result.add(Pair(i, j))
                 }
             }
         }
         return result
     }
+
+    fun buildCandidateRankMap(): Map<String, Int> =
+            rankings.map { buildCandidateRankEntry(it) }.toMap()
+
+    fun buildCandidateRankEntry(ranking: Ranking): Pair<String, Int> =
+            Pair(ranking.candidate, ranking.rank)
 
     fun candidates(): List<String> = rankings.map { it.candidate }
 

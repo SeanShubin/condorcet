@@ -14,6 +14,7 @@ class CondorcetTest {
         runTest("05-tie")
         runTest("06-random-data")
         runTest("07-schulze-cycle")
+        runTest("08-contrast-with-instant-runoff")
     }
 
     private fun runTest(name: String) {

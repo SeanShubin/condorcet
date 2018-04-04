@@ -7,7 +7,7 @@ data class MatrixBuilder(val matrix: Matrix, val candidates: List<String>) {
     fun build(): Matrix = matrix
 
     private fun ballotToMatrix(ballot: Ballot): Matrix {
-        val pairwisePreferences = ballot.pairwisePreferences()
+        val pairwisePreferences = ballot.pairwisePreferences(candidates)
         val pairwisePreferenceIndices = pairwisePreferences.map { candidatePairToIndices(it) }
         val valueMap = pairwisePreferenceIndices.map { Pair(it, 1) }.toMap().withDefault { 0 }
         val size = candidates.size
