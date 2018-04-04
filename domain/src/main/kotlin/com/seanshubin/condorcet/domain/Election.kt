@@ -15,11 +15,15 @@ data class Election(val candidates: List<String>,
     }
 
     fun ballotToSecretBallot(ballot: Ballot): SecretBallot = SecretBallot(ballot.confirmation, ballot.rankings)
-    fun matrixTallyToTally(tally: List<List<Int>>): List<TallyRow> =
-            tally.mapIndexed { index, row -> createRow(index, row) }
-
-    fun createRow(index: Int, row: List<Int>): TallyRow =
-            TallyRow(index, row.map { candidates[it] })
+    fun matrixTallyToTally(matrixTally: List<List<Int>>): List<TallyRow> {
+        val tallyRows = mutableListOf<TallyRow>()
+        var place = 1
+        for (matrixRow in matrixTally) {
+            tallyRows.add(TallyRow(place, matrixRow.map { candidates[it] }))
+            place += matrixRow.size
+        }
+        return tallyRows
+    }
 
     companion object {
         fun fromLines(lines: List<String>): Election =

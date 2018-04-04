@@ -10,6 +10,10 @@ data class Ballot(val id: String,
             throw RuntimeException("ballot for $id has duplicate candidates: ${candidates().joinToString(",")}")
     }
 
+    fun toRow(): List<Any> =
+            listOf(id, confirmation, *(rankings.flatMap { it.toRow() }.toTypedArray()))
+
+
     fun pairwisePreferences(): List<Pair<String, String>> {
         val result = mutableListOf<Pair<String, String>>()
         for (i in 0 until rankings.size - 1) {
