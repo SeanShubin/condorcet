@@ -21,7 +21,7 @@ fun readAllLines(reader: BufferedReader): List<String> {
     var line = reader.readLine()
     while (line != null) {
         lines.add(line)
-        line = readLine()
+        line = reader.readLine()
     }
     return lines
 }
