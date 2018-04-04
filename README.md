@@ -1,5 +1,11 @@
 # The Condorcet Method of resolving votes
 
+## Verify it works
+
+    mvn package
+    java -jar console/target/condorcet.jar < domain/src/test/resources/test-data/03-schulze-example-from-wikipedia/input.txt 
+
+
 ## Goal
 If a candidate would win a two-candidate election against each of the other candidates in a plurality vote, that candidate must be the winner.
 This is known as the "Condorcet Winner Criterion".
