@@ -13,6 +13,7 @@ class CondorcetTest {
         runTest("04-vote-against")
         runTest("05-tie")
         runTest("06-random-data")
+        runTest("07-schulze-cycle")
     }
 
     private fun runTest(name: String) {

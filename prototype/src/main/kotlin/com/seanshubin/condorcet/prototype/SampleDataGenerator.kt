@@ -96,7 +96,7 @@ object SampleDataGenerator {
 
     private fun generateRankings(candidates: List<String>): List<Ranking> {
         val shuffledCandidates = shuffle(candidates)
-        val shuffledRanks = shuffle((1 until candidates.size).toList())
+        val shuffledRanks = shuffle((1..candidates.size).toList())
         val rankAndCandidateList = shuffledRanks zip shuffledCandidates
         return rankAndCandidateList.map { pairToRanking(it) }
     }
