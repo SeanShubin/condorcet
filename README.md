@@ -1,5 +1,9 @@
 # The Condorcet Method of resolving votes
 
+## Prerequisites
+- [maven](https://maven.apache.org/)
+- [java jdk](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
+
 ## Verify it works
 
     mvn package
