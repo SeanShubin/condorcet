@@ -2,10 +2,10 @@ package com.seanshubin.condorcet.domain
 
 import com.seanshubin.condorcet.domain.ListUtil.transpose
 
-class TableFormatter(val wantInterleave:Boolean,
-                     val rowLeft:String = "║",
-                     val rowCenter:String = "│",
-                     val rowRight:String = "║") {
+class TableFormatter(val wantInterleave: Boolean,
+                     val rowLeft: String = "║",
+                     val rowCenter: String = "│",
+                     val rowRight: String = "║") {
 
     interface Justify
 
@@ -18,7 +18,7 @@ class TableFormatter(val wantInterleave:Boolean,
         val columns = paddedRows.transpose()
         val columnWidths = columns.map { a: List<Any> -> maxWidthForColumn(a) }
         val formattedRows = formatRows(columnWidths, paddedRows)
-        return if(wantInterleave){
+        return if (wantInterleave) {
             val top = makeTop(columnWidths)
             val middle = makeMiddle(columnWidths)
             val bottom = makeBottom(columnWidths)

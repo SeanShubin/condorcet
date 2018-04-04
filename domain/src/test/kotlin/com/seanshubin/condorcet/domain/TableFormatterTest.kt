@@ -26,7 +26,7 @@ class TableFormatterTest {
 
     @Test
     fun minimalTable() {
-        val tableFormatter = TableFormatter(wantInterleave = false,rowLeft ="", rowCenter = " ", rowRight = "")
+        val tableFormatter = TableFormatter(wantInterleave = false, rowLeft = "", rowCenter = " ", rowRight = "")
         val input = listOf(
                 listOf("Alice", "Bob", "Carol"),
                 listOf("Dave", "Eve", "Mallory"),

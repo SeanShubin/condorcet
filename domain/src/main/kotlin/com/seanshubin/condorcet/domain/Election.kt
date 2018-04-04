@@ -16,9 +16,10 @@ data class Election(val candidates: List<String>,
 
     fun ballotToSecretBallot(ballot: Ballot): SecretBallot = SecretBallot(ballot.confirmation, ballot.rankings)
     fun matrixTallyToTally(tally: List<List<Int>>): List<TallyRow> =
-        tally.mapIndexed{index, row -> createRow(index, row)}
-    fun createRow(index:Int, row:List<Int>):TallyRow =
-        TallyRow(index, row.map{candidates[it]})
+            tally.mapIndexed { index, row -> createRow(index, row) }
+
+    fun createRow(index: Int, row: List<Int>): TallyRow =
+            TallyRow(index, row.map { candidates[it] })
 
     companion object {
         fun fromLines(lines: List<String>): Election =
