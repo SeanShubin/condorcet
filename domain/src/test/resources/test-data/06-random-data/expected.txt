@@ -42,13 +42,13 @@ ballots (confirmation { rank candidate })
     db072bbc-e09a-417e-9cf8-e2c634196bc8 3 elias-ramirez   2 mervin-shea     4 carmela-graves  1 marquis-reese
     ee9da4ef-296e-4b0a-92cf-70804c51ec3f 1 marquis-reese   3 elias-ramirez   2 carmela-graves  4 mervin-shea
     fafed6e8-9d20-4b49-be51-550c9c051f3c 4 heath-schroeder 2 marquis-reese   1 carmela-graves  3 elias-ramirez
-preference matrix
+preference-matrix
      0 4  9  6  8
     11 0 13 10 11
      6 2  0  6  6
      9 5  9  0  8
      7 4  9  7  0
-strongest path matrix (for schulze method)
+strongest-path-matrix (for schulze method)
      0 0  9  0  8
     11 0 13 10 11
      0 0  0  0  0

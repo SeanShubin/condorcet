@@ -32,7 +32,7 @@ ballots (confirmation { rank candidate })
     b78caec0-2c0a-4c39-a9d8-64d50e30a1cc 1 only-liked-by-two   2 satisfactory
     cdd03711-e842-4d03-ab72-ee4baf39c8a7 1 only-liked-by-two   2 satisfactory
     f604512b-af8c-466a-b1b4-5b5f29d0158e 1 b-only-liked-by-one 2 satisfactory
-preference matrix
+preference-matrix
     0 1 1 1 1 1 1 1 1 1
     1 0 1 1 1 1 1 1 1 1
     1 1 0 1 1 1 1 1 1 1
@@ -43,7 +43,7 @@ preference matrix
     1 1 1 1 1 1 1 0 1 1
     2 2 2 2 2 2 2 2 0 2
     9 9 9 9 9 9 9 9 8 0
-strongest path matrix (for schulze method)
+strongest-path-matrix (for schulze method)
     0 0 0 0 0 0 0 0 0 0
     0 0 0 0 0 0 0 0 0 0
     0 0 0 0 0 0 0 0 0 0

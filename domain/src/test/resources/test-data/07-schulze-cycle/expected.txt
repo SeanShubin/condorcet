@@ -30,11 +30,11 @@ ballots (confirmation { rank candidate })
     e0d0282b-0076-44cc-92e5-749b4f700519 1 dianne-herrera  2 misty-velazquez 3 luther-collins
     f3ae3ed0-a577-470c-91c1-fa31538fa3ad 1 misty-velazquez 2 luther-collins  3 dianne-herrera
     f4783128-9e82-4140-b59b-118fa1d54b1e 1 luther-collins  2 dianne-herrera  3 misty-velazquez
-preference matrix
+preference-matrix
     0 3 6
     7 0 3
     4 7 0
-strongest path matrix (for schulze method)
+strongest-path-matrix (for schulze method)
     0 6 6
     7 0 6
     7 7 0
