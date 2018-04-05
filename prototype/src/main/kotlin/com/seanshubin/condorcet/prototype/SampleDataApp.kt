@@ -6,7 +6,11 @@ import java.nio.file.Files
 import java.nio.file.Paths
 
 fun main(args: Array<String>) {
-    val inputLines = SampleDataGenerator.generateInputLines(100, 10000, 9000)
+    val seed = 12345L
+    val howManyCandidates = 100
+    val howManyVoters = 10000
+    val howManyBallots = 9000
+    val inputLines = SampleDataGenerator(seed).generateInputLines(howManyCandidates, howManyVoters, howManyBallots)
     val outputDir = Paths.get("domain", "src", "test", "resources", "test-data", "10-large-data-set")
     Files.createDirectories(outputDir)
     val inputFile = outputDir.resolve("input.txt")

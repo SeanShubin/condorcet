@@ -10,9 +10,7 @@ import java.nio.charset.Charset
 import java.nio.charset.StandardCharsets
 import java.util.*
 
-object SampleDataGenerator {
-    fun generateNames(howMany: Int): List<String> = (1..howMany).map { generateName() }
-    fun generateConfirmationNumbers(howMany: Int): List<String> = (1..howMany).map { generateConfirmationNumber() }
+class SampleDataGenerator(seed: Long) {
     fun generateInputLines(howManyCandidates: Int, howManyVoters: Int, howManyBallots: Int): List<String> {
         val candidates = generateNames(howManyCandidates)
         val voters = generateNames(howManyVoters)
@@ -28,12 +26,25 @@ object SampleDataGenerator {
 
 
     private val charset: Charset = StandardCharsets.UTF_8
-    private val random: Random = Random()
+    private val random: Random = Random(seed)
     private val surnames = resourceNameToLines("surnames.txt").map { it.toLowerCase() }
     private val femaleNames = resourceNameToLines("female-names.txt").map { it.toLowerCase() }
     private val maleNames = resourceNameToLines("male-names.txt").map { it.toLowerCase() }
     private val givenNames = femaleNames + maleNames
     private val tableFormatter = TableFormatter(wantInterleave = false, rowLeft = "", rowCenter = " ", rowRight = "")
+
+    private fun generateNames(howMany: Int): List<String> =
+            generateNames(emptyList(), howMany)
+
+    private fun generateNames(names: List<String>, howMany: Int): List<String> {
+        val distinctNames = names.distinct()
+        val namesNeeded = howMany - distinctNames.size
+        if (namesNeeded == 0) {
+            return distinctNames
+        } else {
+            return generateNames(distinctNames + (1..namesNeeded).map { generateName() }, howMany)
+        }
+    }
 
     private fun generateName(): String {
         val givenName = chooseRandom(givenNames)
