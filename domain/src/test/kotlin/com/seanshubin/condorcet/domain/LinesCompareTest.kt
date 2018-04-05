@@ -19,7 +19,7 @@ class LinesCompareTest {
     }
 
     @Test
-    fun actual() {
+    fun difference() {
         val expectedMessage =
                 """different at line 2
                   |1 same        = 1

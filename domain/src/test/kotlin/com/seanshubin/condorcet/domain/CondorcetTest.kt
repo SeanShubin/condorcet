@@ -16,7 +16,6 @@ class CondorcetTest {
         runTest("07-schulze-cycle")
         runTest("08-contrast-with-instant-runoff")
         runTest("09-ballot-can-have-ties")
-        runTest("10-large-data-set")
     }
 
     private fun runTest(name: String) {

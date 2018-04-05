@@ -2,44 +2,49 @@ package com.seanshubin.condorcet.domain
 
 object LinesCompare {
     fun <T> diff(a: List<T>, b: List<T>): DifferenceResult {
-        fun buildSeqDifference(index: Int, soFar: List<T>, remainA: List<T>, remainB: List<T>): DifferenceResult {
-            fun composeSeqDifference(a: String, b: String): DifferenceResult {
-                val heading = "different at line ${index + 1}"
-                val sameMessage = soFar.asReversed().withIndex().map { composeSameAtIndex(it) }
-                val differenceMessage = composeDifferentAtIndex(index, a, b)
-                val messageLines = listOf(heading) + sameMessage + differenceMessage + listOf("remaining elements skipped")
-                val isSame = false
-                return DifferenceResult(isSame, messageLines)
-            }
+        var index = 0
+        var isSame = true
+        var header = "identical"
+        val messageLines = mutableListOf<String>()
 
-            return when {
-                remainA.isNotEmpty() && remainB.isNotEmpty() ->
-                    if (remainA[0] == remainB[0]) {
-                        buildSeqDifference(index + 1, listOf(remainA[0]) + soFar, remainA.subList(1, remainA.size), remainB.subList(1, remainB.size))
+        while (isSame && (index < a.size || index < b.size)) {
+            val lineNumber = index + 1
+            when {
+                index < a.size && index < b.size -> {
+                    val lineA = a[index]
+                    val lineB = b[index]
+                    if (a[index] == b[index]) {
+                        messageLines.add("$lineNumber same        = $lineA")
                     } else {
-                        composeSeqDifference(remainA[0].toString(), remainB[0].toString())
+                        isSame = false
+                        header = "different at line $lineNumber"
+                        messageLines.add("$lineNumber different-a = $lineA")
+                        messageLines.add("$lineNumber different-b = $lineB")
+                        messageLines.add("remaining elements skipped")
                     }
-                remainA.isEmpty() && remainB.isNotEmpty() ->
-                    composeSeqDifference("<missing>", remainB[0].toString())
-                remainA.isNotEmpty() && remainB.isEmpty() ->
-                    composeSeqDifference(remainA[0].toString(), "<missing>")
-                else -> {
-                    val isSame = true
-                    val messageLines = listOf("identical") + soFar.asReversed().withIndex().map { composeSameAtIndex(it) }
-                    DifferenceResult(isSame, messageLines)
                 }
+                index < a.size -> {
+                    val lineA = a[index]
+                    isSame = false
+                    header = "different at line $lineNumber"
+                    messageLines.add("$lineNumber different-a = $lineA")
+                    messageLines.add("$lineNumber different-b = <missing>")
+                    messageLines.add("remaining elements skipped")
+
+                }
+                index < b.size -> {
+                    val lineB = b[index]
+                    isSame = false
+                    header = "different at line $lineNumber"
+                    messageLines.add("$lineNumber different-a = <missing>")
+                    messageLines.add("$lineNumber different-b = $lineB")
+                    messageLines.add("remaining elements skipped")
+                }
+
             }
+            index++
         }
-
-        return buildSeqDifference(0, emptyList(), a, b)
+        messageLines.add(0, header)
+        return DifferenceResult(isSame = isSame, messageLines = messageLines)
     }
-
-    private fun <T> composeSameAtIndex(valueAndIndex: IndexedValue<T>): String {
-        val (index, value) = valueAndIndex
-        return "${index + 1} same        = $value"
-    }
-
-    private fun composeDifferentAtIndex(index: Int, a: String, b: String): List<String> =
-            listOf("${index + 1} different-a = $a", "${index + 1} different-b = $b")
-
 }
