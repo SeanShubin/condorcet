@@ -11,7 +11,6 @@ data class Ballot(val id: String,
     fun toRow(): List<Any> =
             listOf(id, confirmation, *(rankings.flatMap { it.toRow() }.toTypedArray()))
 
-
     fun pairwisePreferences(allCandidates: List<String>): List<Pair<String, String>> {
         val candidateRankMap = buildCandidateRankMap()
         fun betterRankThan(left: String, right: String): Boolean {
