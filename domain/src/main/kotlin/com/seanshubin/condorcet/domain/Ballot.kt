@@ -1,7 +1,5 @@
 package com.seanshubin.condorcet.domain
 
-import java.util.regex.Pattern
-
 data class Ballot(val id: String,
                   val confirmation: String,
                   val rankings: List<Ranking>) {
@@ -43,7 +41,7 @@ data class Ballot(val id: String,
     fun candidates(): List<String> = rankings.map { it.candidate }
 
     companion object {
-        private val spacePattern = Pattern.compile("\\s+")!!
+        private val spacePattern = Regex("\\s+")
         fun fromString(s: String): Ballot {
             val words = s.split(spacePattern)
             val id = words[0]

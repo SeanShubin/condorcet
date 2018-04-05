@@ -1,7 +1,6 @@
 package com.seanshubin.condorcet.console
 
 import com.seanshubin.condorcet.domain.Condorcet
-import com.seanshubin.condorcet.domain.GlobalConstants
 import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader
@@ -13,8 +12,7 @@ fun main(args: Array<String>) {
 }
 
 fun readAllLines(inputStream: InputStream): List<String> =
-        readAllLines(BufferedReader(InputStreamReader(
-                inputStream, GlobalConstants.CHARSET)))
+        readAllLines(BufferedReader(InputStreamReader(inputStream)))
 
 fun readAllLines(reader: BufferedReader): List<String> {
     val lines = mutableListOf<String>()

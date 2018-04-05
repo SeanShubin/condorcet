@@ -39,7 +39,7 @@ class CondorcetTest {
         if (inputStream == null) {
             throw RuntimeException("Unable to find resource named '$name'")
         } else {
-            return IoUtil.inputStreamToLines(inputStream, GlobalConstants.CHARSET)
+            return IoUtil.inputStreamToLines(inputStream)
         }
     }
 }

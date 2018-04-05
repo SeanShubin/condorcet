@@ -3,11 +3,10 @@ package com.seanshubin.condorcet.domain
 import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader
-import java.nio.charset.Charset
 
 object IoUtil {
-    fun inputStreamToLines(inputStream: InputStream, charset: Charset): List<String> {
-        val reader = BufferedReader(InputStreamReader(inputStream, charset))
+    fun inputStreamToLines(inputStream: InputStream): List<String> {
+        val reader = BufferedReader(InputStreamReader(inputStream))
         reader.use {
             return bufferedReaderToLines(reader)
         }
