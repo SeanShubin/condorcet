@@ -1,23 +1,23 @@
 package com.seanshubin.condorcet.domain
 
-data class ElectionBuilder(val mode: Mode = Mode.unknown,
-                           val candidates: List<String> = emptyList(),
-                           val eligibleToVote: List<String> = emptyList(),
-                           val ballots: List<Ballot> = emptyList()) {
+data class ElectionBuilder(private val mode: Mode = Mode.Unknown,
+                           private val candidates: List<String> = emptyList(),
+                           private val eligibleToVote: List<String> = emptyList(),
+                           private val ballots: List<Ballot> = emptyList()) {
     enum class Mode(val parseName: String) {
-        candidate("candidates") {
+        Candidates("candidates") {
             override fun processDataLine(builder: ElectionBuilder, line: String): ElectionBuilder =
                     builder.copy(candidates = builder.candidates + listOf(line))
         },
-        voter("eligible-to-vote") {
+        Voters("eligible-to-vote") {
             override fun processDataLine(builder: ElectionBuilder, line: String): ElectionBuilder =
                     builder.copy(eligibleToVote = builder.eligibleToVote + listOf(line))
         },
-        ballot("ballots") {
+        Ballots("ballots") {
             override fun processDataLine(builder: ElectionBuilder, line: String): ElectionBuilder =
                     builder.copy(ballots = builder.ballots + listOf(Ballot.fromString(line)))
         },
-        unknown("unknown") {
+        Unknown("Unknown") {
             override fun processDataLine(builder: ElectionBuilder, line: String): ElectionBuilder {
                 TODO("not implemented")
             }
@@ -27,10 +27,10 @@ data class ElectionBuilder(val mode: Mode = Mode.unknown,
             fun fromString(s: String): Mode {
                 for (value in values()) {
                     if (value.parseName == s.toLowerCase()) {
-                        return value;
+                        return value
                     }
                 }
-                return unknown;
+                return Unknown
             }
         }
 
@@ -38,17 +38,17 @@ data class ElectionBuilder(val mode: Mode = Mode.unknown,
     }
 
     fun processLine(line: String): ElectionBuilder {
-        if (line.startsWith(" ")) {
-            return processDataLine(line.trim())
+        return if (line.startsWith(" ")) {
+            processDataLine(line.trim())
         } else {
-            return switchModes(line)
+            switchModes(line)
         }
     }
 
-    fun processDataLine(line: String): ElectionBuilder =
+    private fun processDataLine(line: String): ElectionBuilder =
             mode.processDataLine(this, line)
 
-    fun switchModes(line: String): ElectionBuilder {
+    private fun switchModes(line: String): ElectionBuilder {
         val firstWord = line.split(" ")[0]
         return copy(mode = Mode.fromString(firstWord))
     }

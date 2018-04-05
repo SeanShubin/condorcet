@@ -1,12 +1,12 @@
 package com.seanshubin.condorcet.domain
 
-data class TalliedElection(val candidates: List<String>,
-                           val voted: List<String>,
-                           val didNotVote: List<String>,
-                           val secretBallots: List<SecretBallot>,
-                           val preferences: Matrix,
-                           val strongestPaths: Matrix,
-                           val tally: List<TallyRow>) {
+data class TalliedElection(private val candidates: List<String>,
+                           private val voted: List<String>,
+                           private val didNotVote: List<String>,
+                           private val secretBallots: List<SecretBallot>,
+                           private val preferences: Matrix,
+                           private val strongestPaths: Matrix,
+                           private val tally: List<TallyRow>) {
     fun toLines(): List<String> {
         val tableFormatter = TableFormatter(wantInterleave = false, rowLeft = "", rowCenter = " ", rowRight = "")
         return listOf("candidates (name)") +

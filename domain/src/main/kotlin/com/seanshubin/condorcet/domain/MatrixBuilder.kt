@@ -11,8 +11,7 @@ data class MatrixBuilder(val matrix: Matrix, val candidates: List<String>) {
         val pairwisePreferenceIndices = pairwisePreferences.map { candidatePairToIndices(it) }
         val valueMap = pairwisePreferenceIndices.map { Pair(it, 1) }.toMap().withDefault { 0 }
         val size = candidates.size
-        val matrix = matrixOfSizeWithGenerator(size, size, { i, j -> valueMap.getValue(Pair(i, j)) })
-        return matrix
+        return matrixOfSizeWithGenerator(size, size, { i, j -> valueMap.getValue(Pair(i, j)) })
     }
 
     private fun candidatePairToIndices(candidatePair: Pair<String, String>): Pair<Int, Int> {

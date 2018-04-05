@@ -1,7 +1,7 @@
 package com.seanshubin.condorcet.domain
 
-data class TallyRow(val place: Int,
-                    val candidates: List<String>) {
+data class TallyRow(private val place: Int,
+                    private val candidates: List<String>) {
     fun toRow(): List<Any> = listOf(placeString(), *candidates.sorted().toTypedArray())
 
     private fun placeString(): String = when (place) {

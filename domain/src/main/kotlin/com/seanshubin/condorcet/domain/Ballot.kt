@@ -7,7 +7,7 @@ data class Ballot(val id: String,
                   val rankings: List<Ranking>) {
     init {
         if (candidates().distinct().size != rankings.size)
-            throw RuntimeException("ballot for $id has duplicate candidates: ${candidates().joinToString(",")}")
+            throw RuntimeException("Ballots for $id has duplicate candidates: ${candidates().joinToString(",")}")
     }
 
     fun toRow(): List<Any> =
@@ -20,7 +20,7 @@ data class Ballot(val id: String,
             val leftRank = candidateRankMap[left]
             val rightRank = candidateRankMap[right]
             if (leftRank == null) return false
-            if (rightRank == null) return true;
+            if (rightRank == null) return true
             return leftRank < rightRank
         }
         val result = mutableListOf<Pair<String, String>>()
@@ -34,10 +34,10 @@ data class Ballot(val id: String,
         return result
     }
 
-    fun buildCandidateRankMap(): Map<String, Int> =
+    private fun buildCandidateRankMap(): Map<String, Int> =
             rankings.map { buildCandidateRankEntry(it) }.toMap()
 
-    fun buildCandidateRankEntry(ranking: Ranking): Pair<String, Int> =
+    private fun buildCandidateRankEntry(ranking: Ranking): Pair<String, Int> =
             Pair(ranking.candidate, ranking.rank)
 
     fun candidates(): List<String> = rankings.map { it.candidate }

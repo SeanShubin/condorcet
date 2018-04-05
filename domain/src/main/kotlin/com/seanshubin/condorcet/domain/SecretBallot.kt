@@ -1,7 +1,7 @@
 package com.seanshubin.condorcet.domain
 
-data class SecretBallot(val confirmation: String,
-                        val rankings: List<Ranking>) : Comparable<SecretBallot> {
+data class SecretBallot(private val confirmation: String,
+                        private val rankings: List<Ranking>) : Comparable<SecretBallot> {
     fun toRow(): List<Any> =
             listOf(confirmation, *(rankings.flatMap { it.toRow() }.toTypedArray()))
 

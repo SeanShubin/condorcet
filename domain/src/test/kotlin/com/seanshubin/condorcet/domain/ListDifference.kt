@@ -1,7 +1,5 @@
 package com.seanshubin.condorcet.domain
 
-private fun stringToLines(s: String): List<String> = s.split("""\r\n|\r|\n""")
-
 object ListDifference {
     fun <T> diff(a: List<T>, b: List<T>): DifferenceResult {
         fun buildSeqDifference(index: Int, soFar: List<T>, remainA: List<T>, remainB: List<T>): DifferenceResult {
@@ -35,9 +33,6 @@ object ListDifference {
 
         return buildSeqDifference(0, emptyList(), a, b)
     }
-
-    fun multilineStringDiff(a: String, b: String): DifferenceResult =
-            diff(stringToLines(a), stringToLines(b))
 
     private fun <T> composeSameAtIndex(valueAndIndex: IndexedValue<T>): String {
         val (index, value) = valueAndIndex

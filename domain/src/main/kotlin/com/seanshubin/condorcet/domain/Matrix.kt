@@ -68,7 +68,7 @@ class Matrix(val rows: List<List<Int>>) {
         }
     }
 
-    fun squareSize(): Int =
+    private fun squareSize(): Int =
             if (rowCount == columnCount)
                 rowCount
             else
@@ -81,7 +81,6 @@ class Matrix(val rows: List<List<Int>>) {
             mutableListOf(*(0 until rowCount).map { mutableListOf(*(0 until columnCount).map { 0 }.toTypedArray()) }.toTypedArray())
 }
 
-fun matrixOfRows(vararg rows: List<Int>): Matrix = Matrix(rows.toList())
 fun matrixOfSizeWithDefault(rowCount: Int, columnCount: Int, default: Int): Matrix =
         Matrix(listOf(*(0 until rowCount).map { listOf(*(0 until columnCount).map { default }.toTypedArray()) }.toTypedArray()))
 

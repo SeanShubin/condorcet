@@ -1,8 +1,8 @@
 package com.seanshubin.condorcet.domain
 
-data class Election(val candidates: List<String>,
-                    val eligibleToVote: List<String>,
-                    val ballots: List<Ballot>) {
+data class Election(private val candidates: List<String>,
+                    private val eligibleToVote: List<String>,
+                    private val ballots: List<Ballot>) {
     fun tally(): TalliedElection {
         val voted = ballots.map { it.id }
         val didNotVote = eligibleToVote.filterNot { voted.contains(it) }
@@ -14,8 +14,9 @@ data class Election(val candidates: List<String>,
         return TalliedElection(candidates, voted, didNotVote, secretBallots, matrix, schulzeMatrix, tally)
     }
 
-    fun ballotToSecretBallot(ballot: Ballot): SecretBallot = SecretBallot(ballot.confirmation, ballot.rankings)
-    fun matrixTallyToTally(matrixTally: List<List<Int>>): List<TallyRow> {
+    private fun ballotToSecretBallot(ballot: Ballot): SecretBallot = SecretBallot(ballot.confirmation, ballot.rankings)
+
+    private fun matrixTallyToTally(matrixTally: List<List<Int>>): List<TallyRow> {
         val tallyRows = mutableListOf<TallyRow>()
         var place = 1
         for (matrixRow in matrixTally) {

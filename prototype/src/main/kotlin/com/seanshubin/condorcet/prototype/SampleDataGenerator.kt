@@ -22,7 +22,7 @@ object SampleDataGenerator {
                 candidates.map { indent(it) } +
                 listOf("eligible-to-vote (name)") +
                 voters.map { indent(it) } +
-                listOf("ballots (name confirmation { rank candidate })") +
+                listOf("ballots (name confirmation { rank Candidates })") +
                 tableFormatter.createTable(ballots.map { it.toRow() }).map { indent(it) }
     }
 
