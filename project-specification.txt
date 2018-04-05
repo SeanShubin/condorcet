@@ -26,5 +26,6 @@
     domain    []
     prototype [domain]
     console   [domain]
+    java-api  [domain]
   }
 }
