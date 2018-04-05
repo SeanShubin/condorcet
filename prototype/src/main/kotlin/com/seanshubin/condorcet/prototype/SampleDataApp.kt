@@ -9,8 +9,8 @@ fun main(args: Array<String>) {
     val inputLines = SampleDataGenerator.generateInputLines(100, 10000, 9000)
     val outputDir = Paths.get("domain", "src", "test", "resources", "test-data", "10-large-data-set")
     Files.createDirectories(outputDir)
-    val outputFile = outputDir.resolve("input.txt")
-    PrintWriter(Files.newBufferedWriter(outputFile)).use { out ->
+    val inputFile = outputDir.resolve("input.txt")
+    PrintWriter(Files.newBufferedWriter(inputFile)).use { out ->
         inputLines.forEach { out.println(it) }
     }
     val outputLines = Condorcet.processLines(inputLines)
@@ -18,4 +18,5 @@ fun main(args: Array<String>) {
     PrintWriter(Files.newBufferedWriter(expectedFile)).use { out ->
         outputLines.forEach { out.println(it) }
     }
+    println("java -jar console/target/condorcet.jar < $inputFile")
 }
