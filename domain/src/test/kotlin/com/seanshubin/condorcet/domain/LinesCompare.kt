@@ -1,10 +1,10 @@
 package com.seanshubin.condorcet.domain
 
-object ListDifference {
+object LinesCompare {
     fun <T> diff(a: List<T>, b: List<T>): DifferenceResult {
         fun buildSeqDifference(index: Int, soFar: List<T>, remainA: List<T>, remainB: List<T>): DifferenceResult {
             fun composeSeqDifference(a: String, b: String): DifferenceResult {
-                val heading = "sequences different at line ${index + 1}"
+                val heading = "different at line ${index + 1}"
                 val sameMessage = soFar.asReversed().withIndex().map { composeSameAtIndex(it) }
                 val differenceMessage = composeDifferentAtIndex(index, a, b)
                 val messageLines = listOf(heading) + sameMessage + differenceMessage + listOf("remaining elements skipped")
@@ -25,7 +25,7 @@ object ListDifference {
                     composeSeqDifference(remainA[0].toString(), "<missing>")
                 else -> {
                     val isSame = true
-                    val messageLines = listOf("sequences are identical") + soFar.asReversed().withIndex().map { composeSameAtIndex(it) }
+                    val messageLines = listOf("identical") + soFar.asReversed().withIndex().map { composeSameAtIndex(it) }
                     DifferenceResult(isSame, messageLines)
                 }
             }

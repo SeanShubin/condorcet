@@ -16,6 +16,7 @@ class CondorcetTest {
         runTest("07-schulze-cycle")
         runTest("08-contrast-with-instant-runoff")
         runTest("09-ballot-can-have-ties")
+        runTest("10-large-data-set")
     }
 
     private fun runTest(name: String) {
@@ -26,7 +27,7 @@ class CondorcetTest {
     }
 
     private fun assertLinesEqual(name: String, actualLines: List<String>, expectedLines: List<String>) {
-        val result = ListDifference.diff(actualLines, expectedLines)
+        val result = LinesCompare.diff(actualLines, expectedLines)
         if (!result.isSame) {
             println("difference in test $name")
             actualLines.forEach { println(it) }

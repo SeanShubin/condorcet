@@ -1,7 +1,21 @@
 package com.seanshubin.condorcet.prototype
 
+import com.seanshubin.condorcet.domain.Condorcet
+import java.io.PrintWriter
+import java.nio.file.Files
+import java.nio.file.Paths
+
 fun main(args: Array<String>) {
-    val lines = SampleDataGenerator.generateNames(10) + SampleDataGenerator.generateConfirmationNumbers(10)
-    lines.forEach { println(it) }
-    SampleDataGenerator.generateInputLines(4, 5, 5).forEach { println(it) }
+    val inputLines = SampleDataGenerator.generateInputLines(100, 10000, 9000)
+    val outputDir = Paths.get("domain", "src", "test", "resources", "test-data", "10-large-data-set")
+    Files.createDirectories(outputDir)
+    val outputFile = outputDir.resolve("input.txt")
+    PrintWriter(Files.newBufferedWriter(outputFile)).use { out ->
+        inputLines.forEach { out.println(it) }
+    }
+    val outputLines = Condorcet.processLines(inputLines)
+    val expectedFile = outputDir.resolve("expected.txt")
+    PrintWriter(Files.newBufferedWriter(expectedFile)).use { out ->
+        outputLines.forEach { out.println(it) }
+    }
 }
