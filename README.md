@@ -9,11 +9,20 @@
     mvn package
     java -jar console/target/condorcet.jar < domain/src/test/resources/test-data/03-schulze-example-from-wikipedia/input.txt 
 
+## Sample build instructions
+
+### Ubuntu 16.04.4 x64
+
+    apt-get update
+    apt-get -y install maven default-jdk
+    git clone https://github.com/SeanShubin/condorcet.git
+    cd condorcet
+    mvn package
+    java -jar console/target/condorcet.jar < domain/src/test/resources/test-data/03-schulze-example-from-wikipedia/input.txt
+
 ## Todo list
 - more detailed technical documentation for the application
 - more detailed technical documentation for schulze flavor of condorcet methods
-- minor tweaks to the output format
-- add more test scenarios  
 
 ## Goal
 If a candidate would win a two-candidate election against each of the other candidates in a plurality vote, that candidate must be the winner.
