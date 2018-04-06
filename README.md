@@ -9,7 +9,7 @@
     mvn package
     java -jar console/target/condorcet.jar < domain/src/test/resources/test-data/03-schulze-example-from-wikipedia/input.txt 
 
-## Sample build instructions
+## Environment specific build instructions
 
 ### Ubuntu 16.04.4 x64
 
