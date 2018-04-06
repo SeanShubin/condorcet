@@ -21,7 +21,7 @@ class Matrix(val rows: List<List<Int>>) {
     fun rowCount(): Int = rowCount
     fun columnCount(): Int = columnCount
 
-    fun get(rowIndex: Int, columnIndex: Int): Int {
+    operator fun get(rowIndex: Int, columnIndex: Int): Int {
         return rows[rowIndex][columnIndex]
     }
 
@@ -93,5 +93,5 @@ fun matrixOfSizeWithGenerator(rowCount: Int, columnCount: Int, generate: (Int, I
 operator fun Matrix.plus(that: Matrix): Matrix {
     if (this.rowCount() != that.rowCount())
         throw RuntimeException("Attempting to add a matrix with ${this.rowCount()} rows to matrix with ${that.rowCount()} rows")
-    return matrixOfSizeWithGenerator(this.rowCount(), this.columnCount(), { i, j -> this.get(i, j) + that.get(i, j) })
+    return matrixOfSizeWithGenerator(this.rowCount(), this.columnCount(), { i, j -> this[i, j] + that[i, j] })
 }
