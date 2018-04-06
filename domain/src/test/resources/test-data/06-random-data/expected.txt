@@ -49,11 +49,11 @@ preference-matrix
      9 5  9  0  8
      7 4  9  7  0
 strongest-path-matrix (for schulze method)
-     0 0  9  0  8
+     0 5  9  7  8
     11 0 13 10 11
-     0 0  0  0  0
-     9 0  9  0  8
-     0 0  9  0  0
+     6 5  0  6  6
+     9 5  9  0  8
+     7 5  9  7  0
 tally (place { candidate })
     1st elias-ramirez
     2nd marquis-reese

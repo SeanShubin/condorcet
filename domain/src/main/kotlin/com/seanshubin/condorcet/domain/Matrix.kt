@@ -30,13 +30,7 @@ class Matrix(val rows: List<List<Int>>) {
         val strongestPaths = createEmptyMutableMatrixData(rowCount, columnCount)
         for (i in 0 until size) {
             for (j in 0 until size) {
-                if (i != j) {
-                    if (rows[i][j] > rows[j][i]) {
-                        strongestPaths[i][j] = rows[i][j]
-                    } else {
-                        strongestPaths[i][j] = 0
-                    }
-                }
+                strongestPaths[i][j] = rows[i][j]
             }
         }
         for (i in 0 until size) {

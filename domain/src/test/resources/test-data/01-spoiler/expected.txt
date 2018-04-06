@@ -31,8 +31,8 @@ preference-matrix
     3 6 0
 strongest-path-matrix (for schulze method)
     0 6 7
-    0 0 0
-    0 6 0
+    4 0 4
+    4 6 0
 tally (place { candidate })
     1st Preferred
     2nd Unpopular
