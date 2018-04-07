@@ -7,15 +7,15 @@ class CondorcetTest {
     val classLoader = this.javaClass.classLoader
     @Test
     fun testDataSamples() {
-        runTest("01-spoiler")
-        runTest("02-tactical-voting")
-        runTest("03-schulze-example-from-wikipedia")
-        runTest("04-vote-against")
-        runTest("05-tie")
-        runTest("06-random-data")
-        runTest("07-schulze-cycle")
-        runTest("08-contrast-with-instant-runoff")
-        runTest("09-ballot-can-have-ties")
+        runTest("01-contrast-first-past-the-post")
+        runTest("02-reduce-tactical-voting")
+        runTest("05-schulze-example-from-wikipedia")
+        runTest("06-vote-against")
+        runTest("08-result-can-have-ties")
+        runTest("09-random-data")
+        runTest("04-resolve-cycle-using-schulze-method")
+        runTest("03-contrast-instant-runoff")
+        runTest("07-ballot-can-have-ties")
     }
 
     private fun runTest(name: String) {

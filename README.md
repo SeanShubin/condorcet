@@ -7,7 +7,7 @@
 ## Verify it works
 
     mvn package
-    java -jar console/target/condorcet.jar < domain/src/test/resources/test-data/03-schulze-example-from-wikipedia/input.txt 
+    java -jar console/target/condorcet.jar < domain/src/test/resources/test-data/05-schulze-example-from-wikipedia/input.txt 
 
 ## Environment specific build instructions
 
