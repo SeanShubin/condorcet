@@ -28,9 +28,6 @@
     - Publish enough information so that any voter can verify the results.
     If it is a secret ballot vote, individuals will not be able to verify the votes of others, but they can still detect if their vote was hijacked.
 
-
-
-
 ### Important, but out of scope to the voting system itself
 - Who is allowed to vote
 - How candidates are selected
@@ -91,55 +88,126 @@ In a Condorcet method, the candidates in this same situation would be ranked min
 [Full Example](domain/src/test/resources/test-data/01-contrast-first-past-the-post)
 
 #### How Condorcet methods reduce tactical voting
-#### Why Condorcet methods are superior to instant runoff voting
-#### How circular ambiguities are resolved using the “schulze method”
-#### Verifying results against example on wikipedia
-
-
-
-
-
 Now consider this dilemma
 
-    3 voters prefer A, then B, then C
-    4 voters prefer B, then A, then C
-    2 voters prefer C, then A, then B
+    3 voters prefer minor-improvements, then status-quo, then radical-changes
+    4 voters prefer status-quo, then minor-improvements, then radical-changes
+    2 voters prefer radical-changes, then minor-improvements, then status-quo
 
-If we are counting the most first place votes or doing instant runoff voting, although the 2 voters prefer C, they don't dare vote that way because that would throw the election to B rather than A.
+If we are counting the most first place votes or doing instant runoff voting, although the 2 voters prefer radical-changes, they don't dare vote that way because that would throw the election to status-quo rather than minor-improvements.
 It is in the best interest of the 2 voters to not express their preference accurately.
-This unfairly misrepresents the number of voters who actually preferred C, as that information about their preference was lost.
+This unfairly misrepresents the number of voters who actually preferred radical-changes, as that information about their preference was lost.
 A Condorcet method would compare the candidates in pairs, like so:
 
-    A defeats B 5 to 4
-    A defeats C 7 to 2
-    B defeats C 7 to 2
+    minor-improvements defeats status-quo 5 to 4
+    minor-improvements defeats radical-changes 7 to 2
+    status-quo defeats radical-changes 7 to 2
     
-So the ranking becomes A, then B, then C.
-In a Condorcet method, the 2 voters could accurately express their vote, and not cause B to defeat A.
+So the ranking becomes minor-improvements, then status-quo, then radical-changes.
+In ase Condorcet method, the 2 voters could accurately express their vote, and not cause status-quo to defeat minor-improvements.
 
+[Full Example](domain/src/test/resources/test-data/02-reduce-tactical-voting)
 
-Instant runoff voting does not meat condorcet criteria, it works like this:
+#### Why Condorcet methods are superior to instant runoff voting
+Instant runoff voting does not meet condorcet criteria, it works like this:
 
-    Ballots are initially counted for each elector's top choice,
-    losing candidates are eliminated,
-    and ballots for losing candidates are redistributed until one candidate is the top remaining choice of a majority of the voters.
+> Ballots are initially counted for each elector's top choice, losing candidates are eliminated, and ballots for losing candidates are redistributed until one candidate is the top remaining choice of a majority of the voters.
 
 The problem with this is that since only the top choices are counted each round, candidates closer to the consensus preference can be the first ones eliminated.
 To illustrate this, consider a contrived case with 10 candidates.
 Each voter has a relatively unknown preference.
-Each voter would settle for B instead of their preference.
+If they could not have their own top choice, each voter would rather have "satisfactory" instead another voter's top choice
 
+    2 voters prefer "only-liked-by-two"   to "satisfactory"
+    1 voters prefer "a-only-liked-by-one" to "satisfactory"
+    1 voters prefer "b-only-liked-by-one" to "satisfactory"
+    1 voters prefer "c-only-liked-by-one" to "satisfactory"
+    1 voters prefer "d-only-liked-by-one" to "satisfactory"
+    1 voters prefer "e-only-liked-by-one" to "satisfactory"
+    1 voters prefer "f-only-liked-by-one" to "satisfactory"
+    1 voters prefer "g-only-liked-by-one" to "satisfactory"
+    1 voters prefer "h-only-liked-by-one" to "satisfactory"
 
-    2 A B C
-    1 C B A
-    1 D B A
-    1 E B A
-    1 F B A
-    1 G B A
-    1 J B A
-    1 I B A
-    1 J B A
+In both instant runoff and first past the post, the candidate "only-liked-by-two wins", even though 80% of the voters prefer "satisfactory" to "only-liked-by-two".
+This is because "satisfactory", the one every single voter preferred over someone else's top candidate, was the first one eliminated. 
 
-In both instant runoff and first past the post A wins, even though 80% of the voters prefer B to A.
-This is because B, the one every single voter preferred over someone else's top candidate, was the first one eliminated. 
+[Full Example](domain/src/test/resources/test-data/03-contrast-instant-runoff)
 
+### More complicated examples
+These examples address more esoteric aspects of the schulze method that only tend to occur in very unusual cases.
+They are probably only useful for people intending to tally the ballots by hand. 
+
+#### How circular ambiguities are resolved using the “schulze method”
+
+Lets say you have 3 candidates, call them "rock", "paper", and "scissors".
+Initially there are 9 votes, like so
+
+    3 voters rank candidates in this order: rock, scissors, paper
+    3 voters rank candidates in this order: paper, rock, scissors
+    3 voters rank candidates in this order: scissors, paper, rock
+
+This results in a 3 way tie.
+Now what would you expect to happen if a 10th voter voted as follows?
+
+    1 voter ranks candidates in this order: rock, scissors, paper
+
+The obvious answer is that now we have enough information to break the tie, ending up with an outcome the same as the last ballot cast.
+How this result can be computed is a little less obvious, consider this
+
+    rock defeats scissors 7 to 3
+    paper beats rock 6 to 4
+    scissors defeats paper 7 to 3
+
+We appear to be going in a circle, indicating all candidates are still tied.
+This is why we need the schulze method to detect that the tie has actually been broken.
+The algorithm is a bit complex, but here is how it works conceptually.
+
+We figure out the "strongest path" for each pair of candidates.
+The direct paths have the following strengths
+
+    rock    -(7)-scissors = 7
+    scissors-(3)-rock     = 3
+    paper   -(6)-rock     = 6
+    rock    -(4)-paper    = 4
+    scissors-(7)-paper    = 7
+    paper   -(3)-scissors = 3
+    
+However, if we consider the indirect paths, we get
+
+    rock    -(4)-paper   -(3)-scissors = 3 
+    scissors-(7)-paper   -(6)-rock     = 6 
+    paper   -(3)-scissors-(3)-rock     = 3 
+    rock    -(7)-scissors-(7)-paper    = 7 
+    scissors-(3)-rock    -(4)-paper    = 3 
+    paper   -(6)-rock    -(7)-scissors = 6 
+
+The result number on the right is the minimum of the two numbers on the left, you are only as strong as your weakest link.
+Now that we have we have two possible paths to each pairing, we take the strongest ones 
+
+    rock    -(7)-scissors              = 7
+    scissors-(7)-paper   -(6)-rock     = 6 
+    paper   -(6)-rock                  = 6
+    rock    -(7)-scissors-(7)-paper    = 7 
+    scissors-(7)-paper                 = 7
+    paper   -(6)-rock    -(7)-scissors = 6
+
+This results in the following
+
+    rock defeats scissors 7 to 6
+    rock beats paper 7 to 6
+    scissors defeats paper 7 to 6
+
+This finally gives us exactly the result we intuitively expected
+
+    1st rock
+    2nd scissors
+    3rd paper
+
+[Full Example](domain/src/test/resources/test-data/04-resolve-cycle-using-schulze-method)
+
+#### Verifying results against example on wikipedia
+
+This example is the same one used on the [wikipedia](https://en.wikipedia.org/wiki/Schulze_method) page for the schulze method.
+It illustrates a much more complicated cycle than the rock-paper-scissors example above.
+
+[Full Example](domain/src/test/resources/test-data/05-schulze-example-from-wikipedia)
