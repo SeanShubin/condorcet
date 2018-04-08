@@ -36,7 +36,6 @@
         <module>domain</module>
         <module>prototype</module>
         <module>console</module>
-        <module>java-api</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
