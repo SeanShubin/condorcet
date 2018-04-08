@@ -7,7 +7,7 @@
 ## Verify it works
 
     mvn package
-    java -jar console/target/condorcet.jar < domain/src/test/resources/test-data/05-schulze-example-from-wikipedia/input.txt 
+    java -jar console/target/condorcet.jar < domain/src/test/resources/test-data/05-schulze-example-from-wikipedia/input.txt
 
 ## Environment specific build instructions
 
@@ -41,8 +41,8 @@
 - The voter is able to give the same rank to multiple candidates
     - This allows the voter to signify no preference between a group of candidates, while still expressing the ranking of that group in relation to other candidates.
 - The voter is able to express which candidates they are voting against
-    - This can be done by having a “<none of these>” entry they can rank in relation to the other candidates
-    - While in practice it may be necessary to elect a candidate below <none of these> should <none of these> win, it is still useful to capture the fact that the voters did not have any choices they approved of.  This situation may indicate a problem with the candidate selection process, or the need to support write-in candidates.  
+    - This can be done by having a "none-of-these" entry they can rank in relation to the other candidates
+    - While in practice it may be necessary to elect a candidate below "none-of-these" should "none-of-these" win, it is still useful to capture the fact that the voters did not have any choices they approved of.  This situation may indicate a problem with the candidate selection process, or the need to support write-in candidates.
 - The voter should be able to cast a vote with no rankings
     - This allows for telling the difference between “no preference at all”, and “preference is unknown”.
 - Any unranked candidates are considered lower rank than ranked candidates
@@ -102,7 +102,7 @@ A Condorcet method would compare the candidates in pairs, like so:
     minor-improvements defeats status-quo 5 to 4
     minor-improvements defeats radical-changes 7 to 2
     status-quo defeats radical-changes 7 to 2
-    
+
 So the ranking becomes minor-improvements, then status-quo, then radical-changes.
 In ase Condorcet method, the 2 voters could accurately express their vote, and not cause status-quo to defeat minor-improvements.
 
@@ -129,13 +129,13 @@ If they could not have their own top choice, each voter would rather have "satis
     1 voters prefer "h-only-liked-by-one" to "satisfactory"
 
 In both instant runoff and first past the post, the candidate "only-liked-by-two wins", even though 80% of the voters prefer "satisfactory" to "only-liked-by-two".
-This is because "satisfactory", the one every single voter preferred over someone else's top candidate, was the first one eliminated. 
+This is because "satisfactory", the one every single voter preferred over someone else's top candidate, was the first one eliminated.
 
 [Full Example](domain/src/test/resources/test-data/03-contrast-instant-runoff)
 
 ### More complicated examples
 These examples address more esoteric aspects of the schulze method that only tend to occur in very unusual cases.
-They are probably only useful for people intending to tally the ballots by hand. 
+They are probably only useful for people intending to tally the ballots by hand.
 
 #### How circular ambiguities are resolved using the “schulze method”
 
@@ -171,23 +171,23 @@ The direct paths have the following strengths
     rock    -(4)-paper    = 4
     scissors-(7)-paper    = 7
     paper   -(3)-scissors = 3
-    
+
 However, if we consider the indirect paths, we get
 
-    rock    -(4)-paper   -(3)-scissors = 3 
-    scissors-(7)-paper   -(6)-rock     = 6 
-    paper   -(3)-scissors-(3)-rock     = 3 
-    rock    -(7)-scissors-(7)-paper    = 7 
-    scissors-(3)-rock    -(4)-paper    = 3 
-    paper   -(6)-rock    -(7)-scissors = 6 
+    rock    -(4)-paper   -(3)-scissors = 3
+    scissors-(7)-paper   -(6)-rock     = 6
+    paper   -(3)-scissors-(3)-rock     = 3
+    rock    -(7)-scissors-(7)-paper    = 7
+    scissors-(3)-rock    -(4)-paper    = 3
+    paper   -(6)-rock    -(7)-scissors = 6
 
 The result number on the right is the minimum of the two numbers on the left, you are only as strong as your weakest link.
-Now that we have we have two possible paths to each pairing, we take the strongest ones 
+Now that we have we have two possible paths to each pairing, we take the strongest ones
 
     rock    -(7)-scissors              = 7
-    scissors-(7)-paper   -(6)-rock     = 6 
+    scissors-(7)-paper   -(6)-rock     = 6
     paper   -(6)-rock                  = 6
-    rock    -(7)-scissors-(7)-paper    = 7 
+    rock    -(7)-scissors-(7)-paper    = 7
     scissors-(7)-paper                 = 7
     paper   -(6)-rock    -(7)-scissors = 6
 
