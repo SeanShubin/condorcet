@@ -53,6 +53,7 @@ then sends the results to standard output.
 - All unranked candidates are considered ties with each other
 
 ### Mechanics
+- These are recommendations for how a user interface should interact with this tool
 - Each voter is given a voter id.
     - This is attached to their ballot so that the voter cannot vote twice
 - Upon voting, each voter is given a secret ballot identifier used to identify which ballot is theirs
