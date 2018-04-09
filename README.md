@@ -72,9 +72,9 @@ These are recommendations for how a user interface should interact with this too
 - The list of eligible voters who did not vote, allows those who did not vote, to detect if a vote was cast in their name
 - The “schulze method” is one kind of Condorcet method, this will be used to resolve circular ambiguities (refer to example below)
 
-### Examples
+## Examples
 
-#### Why Condorcet methods are superior to first past the post
+### Why Condorcet methods are superior to first past the post
 Lets say you have 3 candidates, lets call them "minor-improvements", "status-quo", and "radical-changes".
 
     30% of the population prefers minor-improvements, then status-quo, then radical-changes
@@ -94,7 +94,7 @@ In a Condorcet method, the candidates in this same situation would be ranked min
 
 [Full Example](domain/src/test/resources/test-data/01-contrast-first-past-the-post)
 
-#### How Condorcet methods reduce tactical voting
+### How Condorcet methods reduce tactical voting
 Now consider this dilemma
 
     3 voters prefer minor-improvements, then status-quo, then radical-changes
@@ -115,7 +115,7 @@ In ase Condorcet method, the 2 voters could accurately express their vote, and n
 
 [Full Example](domain/src/test/resources/test-data/02-reduce-tactical-voting)
 
-#### Why Condorcet methods are superior to instant runoff voting
+### Why Condorcet methods are superior to instant runoff voting
 Instant runoff voting does not meet condorcet criteria, it works like this:
 
 > Ballots are initially counted for each elector's top choice, losing candidates are eliminated, and ballots for losing candidates are redistributed until one candidate is the top remaining choice of a majority of the voters.
@@ -140,11 +140,11 @@ This is because "satisfactory", the one every single voter preferred over someon
 
 [Full Example](domain/src/test/resources/test-data/03-contrast-instant-runoff)
 
-### More complicated examples
+## More complicated examples
 These examples address more esoteric aspects of the schulze method that only tend to occur in very unusual cases.
 They are probably only useful for people intending to tally the ballots by hand.
 
-#### How circular ambiguities are resolved using the “schulze method”
+### How circular ambiguities are resolved using the “schulze method”
 
 Lets say you have 3 candidates, call them "rock", "paper", and "scissors".
 Initially there are 9 votes, like so
@@ -212,7 +212,7 @@ This finally gives us exactly the result we intuitively expected
 
 [Full Example](domain/src/test/resources/test-data/04-resolve-cycle-using-schulze-method)
 
-#### Verifying results against example on wikipedia
+### Verifying results against example on wikipedia
 
 This example is the same one used on the [wikipedia](https://en.wikipedia.org/wiki/Schulze_method) page for the schulze method.
 It illustrates a much more complicated cycle than the rock-paper-scissors example above.
