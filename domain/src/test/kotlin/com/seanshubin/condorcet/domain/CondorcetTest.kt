@@ -9,13 +9,13 @@ class CondorcetTest {
     fun testDataSamples() {
         runTest("01-contrast-first-past-the-post")
         runTest("02-reduce-tactical-voting")
+        runTest("03-contrast-instant-runoff")
+        runTest("04-resolve-cycle-using-schulze-method")
         runTest("05-schulze-example-from-wikipedia")
         runTest("06-vote-against")
+        runTest("07-ballot-can-have-ties")
         runTest("08-result-can-have-ties")
         runTest("09-random-data")
-        runTest("04-resolve-cycle-using-schulze-method")
-        runTest("03-contrast-instant-runoff")
-        runTest("07-ballot-can-have-ties")
     }
 
     private fun runTest(name: String) {
