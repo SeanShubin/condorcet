@@ -1,4 +1,8 @@
 # The Condorcet Method of resolving votes
+This is the computational portion of a Condorcet voting system using the schulze method.
+It reads from standard input,
+then tallies the ballots,
+then sends the results to standard output.
 
 ## Prerequisites
 - [maven](https://maven.apache.org/)
@@ -19,10 +23,6 @@
     cd condorcet
     mvn package
     java -jar console/target/condorcet.jar < domain/src/test/resources/test-data/03-schulze-example-from-wikipedia/input.txt
-
-## Todo list
-- more detailed technical documentation for the application
-- more detailed technical documentation for schulze flavor of condorcet methods
 
 ## Goal
 If a candidate would win a two-candidate election against each of the other candidates in a plurality vote, that candidate must be the winner.
