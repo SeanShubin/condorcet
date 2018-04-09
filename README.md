@@ -39,6 +39,9 @@ then sends the results to standard output.
 - What to do if fraudulent ballots are detected
 - What to do if the tally is discovered to be incorrect
 
+## Interacting with this tool
+These are recommendations for how a user interface should interact with this tool.
+
 ### Capturing individual preference
 - The voter is able to specify all of their preferences, not just their top candidate
     - This can be done by assigning a “rank” to each candidate, where 1 is their most preferred, 2 is their second most preferred, and so on.
@@ -53,7 +56,6 @@ then sends the results to standard output.
 - All unranked candidates are considered ties with each other
 
 ### Mechanics
-- These are recommendations for how a user interface should interact with this tool
 - Each voter is given a voter id.
     - This is attached to their ballot so that the voter cannot vote twice
 - Upon voting, each voter is given a secret ballot identifier used to identify which ballot is theirs
