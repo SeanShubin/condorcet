@@ -65,11 +65,11 @@ These are recommendations for how a user interface should interact with this too
     - The list of eligible voters
     - The eligible voters who did not vote
     - The actual votes, using the secret ballot identifier instead of the voter id
-    - (optional) Intermediate calculations for the tally, so that if a technically minded person arrives at a different result, they can check to see if the flaw is in the voting system or their own calculations.
+    - (optional) Intermediate calculations for the tally, so that if a technically minded person arrives at a different result, it is easier for them to determine if the flaw is in the voting system or their own calculations.
     - (optional, and only if not secret ballot) The actual ballots, including the voter id, can be made public.  This may be useful for practice runs used to test the voting system, or in representative voting situations where it is necessary to hold voters accountable to those they represent.
 - The secret ballot identifier and actual votes, allows each voter to confirm that their vote was cast correctly, without revealing their identity.
-- The list of eligible voters, allows someone who thought they were eligible to vote, to detect that their vote was not counted
-- The list of eligible voters who did not vote, allows those who did not vote, to detect if a vote was cast in their name
+- The list of eligible voters.  This allows someone who thought they were eligible to vote, to detect that their vote was not counted
+- The list of eligible voters who did not vote.  This allows those who did not vote, to detect if a vote was cast in their name
 - The “schulze method” is one kind of Condorcet method, this will be used to resolve circular ambiguities (refer to example below)
 
 ## Examples
@@ -95,7 +95,7 @@ In a Condorcet method, the candidates in this same situation would be ranked min
 [Full Example](domain/src/test/resources/test-data/01-contrast-first-past-the-post)
 
 ### How Condorcet methods reduce tactical voting
-Now consider this dilemma
+Consider this dilemma
 
     3 voters prefer minor-improvements, then status-quo, then radical-changes
     4 voters prefer status-quo, then minor-improvements, then radical-changes
@@ -111,7 +111,7 @@ A Condorcet method would compare the candidates in pairs, like so:
     status-quo defeats radical-changes 7 to 2
 
 So the ranking becomes minor-improvements, then status-quo, then radical-changes.
-In ase Condorcet method, the 2 voters could accurately express their vote, and not cause status-quo to defeat minor-improvements.
+In a Condorcet method, the 2 voters could accurately express their vote, without sabotaging their own interests by causing status-quo to defeat minor-improvements.
 
 [Full Example](domain/src/test/resources/test-data/02-reduce-tactical-voting)
 
@@ -120,7 +120,7 @@ Instant runoff voting does not meet condorcet criteria, it works like this:
 
 > Ballots are initially counted for each elector's top choice, losing candidates are eliminated, and ballots for losing candidates are redistributed until one candidate is the top remaining choice of a majority of the voters.
 
-The problem with this is that since only the top choices are counted each round, candidates closer to the consensus preference can be the first ones eliminated.
+The problem here is that since only the top choices are counted each round, candidates closer to the consensus preference can be the first ones eliminated.
 To illustrate this, consider a contrived case with 10 candidates.
 Each voter has a relatively unknown preference.
 If they could not have their own top choice, each voter would rather have "satisfactory" instead another voter's top choice
@@ -135,7 +135,7 @@ If they could not have their own top choice, each voter would rather have "satis
     1 voters prefer "g-only-liked-by-one" to "satisfactory"
     1 voters prefer "h-only-liked-by-one" to "satisfactory"
 
-In both instant runoff and first past the post, the candidate "only-liked-by-two wins", even though 80% of the voters prefer "satisfactory" to "only-liked-by-two".
+In both instant runoff and first past the post, the candidate "only-liked-by-two" wins, even though 80% of the voters prefer "satisfactory" to "only-liked-by-two".
 This is because "satisfactory", the one every single voter preferred over someone else's top candidate, was the first one eliminated.
 
 [Full Example](domain/src/test/resources/test-data/03-contrast-instant-runoff)
