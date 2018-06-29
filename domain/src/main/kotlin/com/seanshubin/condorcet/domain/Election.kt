@@ -4,6 +4,7 @@ data class Election(private val candidates: List<String>,
                     private val eligibleToVote: List<String>,
                     private val ballots: List<Ballot>) {
     fun tally(): TalliedElection {
+        validate()
         val voted = ballots.map { it.id }
         val didNotVote = eligibleToVote.filterNot { voted.contains(it) }
         val matrix = ballots.fold(MatrixBuilder.empty(candidates), MatrixBuilder.processBallot).build()
@@ -12,6 +13,10 @@ data class Election(private val candidates: List<String>,
         val tally = matrixTallyToTally(matrixTally)
         val secretBallots = ballots.map { ballotToSecretBallot(it) }
         return TalliedElection(candidates, voted, didNotVote, secretBallots, matrix, schulzeMatrix, tally)
+    }
+
+    private fun validate(){
+        ballots.forEach { it.validate(candidates) }
     }
 
     private fun ballotToSecretBallot(ballot: Ballot): SecretBallot = SecretBallot(ballot.confirmation, ballot.rankings)

@@ -31,6 +31,10 @@ data class Ballot(val id: String,
         return result
     }
 
+    fun validate(candidates:List<String>){
+        rankings.forEach { it.validate(candidates) }
+    }
+
     private fun buildCandidateRankMap(): Map<String, Int> =
             rankings.map { buildCandidateRankEntry(it) }.toMap()
 
